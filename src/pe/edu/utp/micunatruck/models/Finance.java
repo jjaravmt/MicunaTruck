@@ -3,34 +3,38 @@ import java.util.Date;
 
 public class Finance {
     private int id;
-    private int origin_id;
-    private int origin_type_id;
+    private int originId;
+    private int originTypeId;
     private double amount;
-    private Date start_date;
-    private Date end_date;
-    private boolean flag_active;
-    private Date update_at;
-    private Date deleted_at;
-    private Date created_at;
+    private Date startDate;
+    private Date endDate;
+    private boolean flagActive;
+    private Date updateAt;
+    private Date deletedAt;
+    private Date createdAt;
+
+    public Finance(int id) {
+        this.id = id;
+    }
 
     public Finance() {
 
     }
 
-    public Finance(int id, int origin_id,
-                   int origin_type_id, double amount, Date start_date, Date end_date,
-                   boolean flag_active, Date update_at, Date deleted_at, Date created_at) {
+    public Finance(int id, int originId, int originTypeId, double amount, Date startDate, Date endDate,
+                   boolean flagActive, Date updateAt, Date deletedAt, Date createdAt) {
         this.id = id;
-        this.origin_id = origin_id;
-        this.origin_type_id = origin_type_id;
+        this.originId = originId;
+        this.originTypeId = originTypeId;
         this.amount = amount;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.flag_active = flag_active;
-        this.update_at = update_at;
-        this.deleted_at = deleted_at;
-        this.created_at = created_at;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.flagActive = flagActive;
+        this.updateAt = updateAt;
+        this.deletedAt = deletedAt;
+        this.createdAt = createdAt;
     }
+
 
     public int getId() {
         return id;
@@ -41,21 +45,21 @@ public class Finance {
         return this;
     }
 
-    public int getOrigin_id() {
-        return origin_id;
+    public int getOriginId() {
+        return originId;
     }
 
-    public Finance setOrigin_id(int origin_id) {
-        this.origin_id = origin_id;
+    public Finance setOriginId(int originId) {
+        this.originId = originId;
         return this;
     }
 
-    public int getOrigin_type_id() {
-        return origin_type_id;
+    public int getOriginTypeId() {
+        return originTypeId;
     }
 
-    public Finance setOrigin_type_id(int origin_type_id) {
-        this.origin_type_id = origin_type_id;
+    public Finance setOriginTypeId(int originTypeId) {
+        this.originTypeId = originTypeId;
         return this;
     }
 
@@ -68,57 +72,58 @@ public class Finance {
         return this;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public Finance setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public Finance setStartDate(Date startDate) {
+        this.startDate = startDate;
         return this;
     }
 
-    public Date getEnd_date() {
-        return end_date;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public Finance setEnd_date(Date end_date) {
-        this.end_date = end_date;
+    public Finance setEndDate(Date endDate) {
+        this.endDate = endDate;
         return this;
     }
 
-    public boolean isFlag_active() {
-        return flag_active;
+    public boolean isFlagActive() {
+        return flagActive;
     }
 
-    public Finance setFlag_active(boolean flag_active) {
-        this.flag_active = flag_active;
+    public Finance setFlagActive(boolean flagActive) {
+        this.flagActive = flagActive;
         return this;
     }
 
-    public Date getUpdate_at() {
-        return update_at;
+    public Date getUpdateAt() {
+        return updateAt;
     }
 
-    public Finance setUpdate_at(Date update_at) {
-        this.update_at = update_at;
+    public Finance setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
         return this;
     }
 
-    public Date getDeleted_at() {
-        return deleted_at;
+    public Date getDeletedAt() {
+        return deletedAt;
     }
 
-    public Finance setDeleted_at(Date deleted_at) {
-        this.deleted_at = deleted_at;
+    public Finance setDeletedAt(Date deletedAt) {
+        this.deletedAt = deletedAt;
         return this;
     }
 
-    public Date getCreated_at() {
-        return created_at;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public Finance setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public Finance setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
         return this;
+        //para que puedas concatenar todos al financeEntity
     }
 }

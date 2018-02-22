@@ -10,26 +10,26 @@ import java.util.List;
 public class FinancesEntity extends BaseEntity {
     private static String DEFAULT_SQL = "SELECT * FROM micunatruck.events";
 
-    private List<Event> findByCriteria(String sql){
-        List<Event> finances;
+    private List<Finance> findByCriteria(String sql){
+        List<Finance> Finances;
         if(getConnection() != null){
-            finances = new ArrayList<>();
+            Finances = new ArrayList<>();
             try {
                 ResultSet resultSet = getConnection().createStatement()
                         .executeQuery(sql);
                 while (resultSet.next()){
-                    Finance region = new Event()
+                    Finance region = new Finance()
                             .setId(resultSet.getInt("id"))
-                            .setOrigin_id(resultSet.getInt("origin_id"))
-                            .setOrigin_type_id(resultSet.getInt("origin_type_id"))
-                            .setAmount(resultSet.getString("amount"))
-                            .setStart_date(resultSet.getString("start_date"))
-                            .setEnd_date(resultSet.getString("end_date"))
-                            .setFlagActive(resultSet.getByte("flag_active"))
+                                .setOriginId(resultSet.getInt("originId"))
+                            .setOriginTypeId(resultSet.getInt("originId"))
+                            .setAmount(resultSet.getDouble("amount"))
+                            .setStartDate(resultSet.getDate("start_date"))
+                            .setEndDate(resultSet.getDate("end_date"))
+                            .setFlagActive(resultSet.getBoolean("flag_active"))
                             ;//comentario
-                    finances.add(region);
+                    Finances.add(region);
                 }
-                return finances;
+                return Finances;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -42,18 +42,18 @@ public class FinancesEntity extends BaseEntity {
     }
     ///listFinance
     public Finance findById(int id){
-        List<Event> events = findByCriteria(DEFAULT_SQL + " WHERE id = " +
+        List<Finance> finances = findByCriteria(DEFAULT_SQL + " WHERE id = " +
                 String.valueOf(id));
         return (finances) != null ? finances.get(0) : null;
     }
 
     public Finance findByName(String name){
-        List<Finance> events = findByCriteria(DEFAULT_SQL+ " WHERE name like '%" + name + "%'");
-        return (events != null) ? finance.get(0) : null;
+        List<Finance> incomes = findByCriteria(DEFAULT_SQL+ " WHERE name like '%" + name + "%'");
+        return (incomes != null) ? incomes.get(0) : null;
     }
 
     private int getMaxId(){
-        String sql = "SELECT MAX(id) AS max_id FROM events";
+        String sql = "SELECT MAX(id) AS max_id FROM income";
         if(getConnection() != null){
             try {
                 ResultSet resultSet = getConnection().createStatement().executeQuery(sql);
@@ -76,16 +76,18 @@ public class FinancesEntity extends BaseEntity {
         return 0;
     }
 
-    public Event create(int user_id, int event_status_id, String name, String description, String image){
+    public Finance create(int id, int originId, int originTypeId, double amount, Date startDate, Date endDate,
+                          boolean flagActive, Date updateAt, Date deletedAt, Date createdAt){
         if(findByName(name) == null){
             if(getConnection() != null){
-                Date createdAt = new Date();
-                String sql = "INSERT INTO events(user_id, event_status_id, name, description, image, flag_active, updated_at, created_at) " +
-                        "VALUES("+user_id+","+event_status_id+",'"+name+"','"+description+"','"+image+"',0,'"+(new Timestamp(createdAt.getTime())).toString()+"','"+(new Timestamp(createdAt.getTime())).toString()+"')";
+                String sql = "INSERT INTO incomes(user_id, event_status_id, name, description, image, flag_active, updated_at, created_at) " +
+                        "VALUES("+id+","+originId+",'"+originTypeId+"','"+amount+"','"+startDate+"',"+endDate+","+flagActive+","+updateAt+","+updateAt+
+                        ","+deletedAt+","+createdAt+"'"+(new Timestamp(createdAt.getTime())).toString()+"','"+(new Timestamp(createdAt.getTime())).toString()+"')";
                 int results = updateByCriteria(sql);
                 if(results > 0){
-                    Event event = new Event(getMaxId(), user_id, event_status_id, name, description, image, 1);
-                    return event;
+                    Finance finance = new Finance(id,originId,originTypeId,amount,startDate,endDate,
+                    flagActive,updateAt,deletedAt,createdAt);
+                    return finance;
                 }
             }
         }
@@ -100,7 +102,7 @@ public class FinancesEntity extends BaseEntity {
         return updateByCriteria("DELETE FROM events WHERE name = " +  name) > 0;
     }
 
-    public boolean update(Event region){
+    public boolean update(Finance region){
         return updateByCriteria("UPDATE region SET user_id='"+String.valueOf(region.getUserId())+
                 "', event_status_id ='"+String.valueOf(region.getUserId())+"', name = '"+region.getName()+
                 "', description ='"+String.valueOf(region.getDescription())+"', image='"+String.valueOf(region.getImage())+"' WHERE id = " + String.valueOf(region.getId())) > 0;
