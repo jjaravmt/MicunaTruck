@@ -5,8 +5,8 @@ import java.util.Date;
 public class Event {
 
     private int id;
-    private int userId;
-    private int eventStatusId;
+    private User user;
+    private EventStatus eventStatus;
     private String name;
     private String description;
     private String image;
@@ -19,10 +19,10 @@ public class Event {
 
     }
 
-    public Event(int id, int userId, int eventStatusId, String name, String description, String image, int flagActive){
+    public Event(int id, User user, EventStatus eventStatus, String name, String description, String image, int flagActive){
         this.setId(id);
-        this.setUserId(userId);
-        this.setEventStatusId(eventStatusId);
+        this.setUser(user);
+        this.setEventStatus(eventStatus);
         this.setName(name);
         this.setDescription(description);
         this.setImage(image);
@@ -38,23 +38,7 @@ public class Event {
         return this;
     }
 
-    public int getUserId() {
-        return userId;
-    }
 
-    public Event setUserId(int userId) {
-        this.userId = userId;
-        return this;
-    }
-
-    public int getEventStatusId() {
-        return eventStatusId;
-    }
-
-    public Event setEventStatusId(int eventStatusId) {
-        this.eventStatusId = eventStatusId;
-        return this;
-    }
 
     public String getName() {
         return name;
@@ -105,4 +89,21 @@ public class Event {
         return createdAt;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public Event setUser(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public EventStatus getEventStatus() {
+        return eventStatus;
+    }
+
+    public Event setEventStatus(EventStatus eventStatus) {
+        this.eventStatus = eventStatus;
+        return this;
+    }
 }
