@@ -10,7 +10,7 @@ import java.util.List;
 public class EventsEntity extends BaseEntity {
     private static String DEFAULT_SQL = "SELECT * FROM micunatruck.events";
 
-    private List<Event> findByCriteria(String sql){
+    private List<Event> findByCriteria(String sql, UsersEntity usersEntity, EventStatusEntity eventStatusEntity){
         List<Event> events;
         if(getConnection() != null){
             events = new ArrayList<>();
@@ -18,16 +18,16 @@ public class EventsEntity extends BaseEntity {
                 ResultSet resultSet = getConnection().createStatement()
                         .executeQuery(sql);
                 while (resultSet.next()){
-                    Event region = new Event()
+                    Event event = new Event()
                             .setId(resultSet.getInt("id"))
-                            .setUserId(resultSet.getInt("user_id"))
-                            .setEventStatusId(resultSet.getInt("event_status_id"))
+                            .setUser(usersEntity.findById(resultSet.getInt("user_id")))
+                            .setEventStatus(eventStatusEntity.findById(resultSet.getInt("event_status_id")))
                             .setName(resultSet.getString("name"))
                             .setDescription(resultSet.getString("description"))
                             .setImage(resultSet.getString("image"))
                             .setFlagActive(resultSet.getByte("flag_active"))
                             ;//comentario
-                    events.add(region);
+                    events.add(event);
                 }
                 return events;
             } catch (SQLException e) {
@@ -38,17 +38,17 @@ public class EventsEntity extends BaseEntity {
     }
 
     public List<Event> findAll(){
-        return findByCriteria(DEFAULT_SQL);
+        return findByCriteria(DEFAULT_SQL, new UsersEntity(), new EventStatusEntity());
     }
 
     public Event findById(int id){
         List<Event> events = findByCriteria(DEFAULT_SQL + " WHERE id = " +
-                String.valueOf(id));
+                String.valueOf(id), new UsersEntity(), new EventStatusEntity());
         return (events) != null ? events.get(0) : null;
     }
 
     public Event findByName(String name){
-        List<Event> events = findByCriteria(DEFAULT_SQL+ " WHERE name like '%" + name + "%'");
+        List<Event> events = findByCriteria(DEFAULT_SQL+ " WHERE name like '%" + name + "%'", new UsersEntity(), new EventStatusEntity());
         return (events != null) ? events.get(0) : null;
     }
 
@@ -76,15 +76,15 @@ public class EventsEntity extends BaseEntity {
         return 0;
     }
 
-    public Event create(int user_id, int event_status_id, String name, String description, String image){
+    public Event create(User user, EventStatus eventStatus, String name, String description, String image){
         if(findByName(name) == null){
             if(getConnection() != null){
                 Date createdAt = new Date();
                 String sql = "INSERT INTO events(user_id, event_status_id, name, description, image, flag_active, updated_at, created_at) " +
-                        "VALUES("+user_id+","+event_status_id+",'"+name+"','"+description+"','"+image+"',0,'"+(new Timestamp(createdAt.getTime())).toString()+"','"+(new Timestamp(createdAt.getTime())).toString()+"')";
+                        "VALUES("+user.getId()+","+eventStatus.getId()+",'"+name+"','"+description+"','"+image+"',0,'"+(new Timestamp(createdAt.getTime())).toString()+"','"+(new Timestamp(createdAt.getTime())).toString()+"')";
                 int results = updateByCriteria(sql);
                 if(results > 0){
-                    Event event = new Event(getMaxId(), user_id, event_status_id, name, description, image, 1);
+                    Event event = new Event(getMaxId(), user, eventStatus, name, description, image, 1);
                     return event;
                 }
             }
@@ -100,9 +100,9 @@ public class EventsEntity extends BaseEntity {
         return updateByCriteria("DELETE FROM events WHERE name = " +  name) > 0;
     }
 
-    public boolean update(Event region){
-        return updateByCriteria("UPDATE region SET user_id='"+String.valueOf(region.getUserId())+
-                "', event_status_id ='"+String.valueOf(region.getUserId())+"', name = '"+region.getName()+
-                "', description ='"+String.valueOf(region.getDescription())+"', image='"+String.valueOf(region.getImage())+"' WHERE id = " + String.valueOf(region.getId())) > 0;
+    public boolean update(Event event, User user, EventStatus eventStatus){
+        return updateByCriteria("UPDATE event SET user_id='"+String.valueOf(user.getId())+
+                "', event_status_id ='"+String.valueOf(eventStatus.getId())+"', name = '"+event.getName()+
+                "', description ='"+String.valueOf(event.getDescription())+"', image='"+String.valueOf(event.getImage())+"' WHERE id = " + String.valueOf(event.getId())) > 0;
     }
 }
