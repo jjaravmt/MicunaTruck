@@ -10,7 +10,7 @@ import java.util.Date;
         private double price;
         private Date start_date;
         private Date end_date;
-        private boolean flagActive;
+        private int flagActive;
         private Date deletedAt = new Date();
         private Date updatedAt = new Date();
         private Date createdAt = new Date();
@@ -24,7 +24,7 @@ import java.util.Date;
 
 
 
-        public Ads(int id, Admin admin, String name, String description, String image, double price, Date start_date, Date end_date, boolean flagActive, Date deletedAt, Date updatedAt, Date createdAt, int idSpace) {
+        public Ads(int id, Admin admin, String name, String description, String image, double price, Date start_date, Date end_date, int flagActive, Date deletedAt, Date updatedAt, Date createdAt, int idSpace) {
             this.id = id;
             this.admin = admin;
             this.name = name;
@@ -40,7 +40,7 @@ import java.util.Date;
             this.idSpace = idSpace;
         }
 
-        public Ads(int id, Admin admin, String name, String description, String image, double price, Date start_date, Date end_date, boolean flagActive, Date createdAt, int idSpace) {
+        public Ads(int id, Admin admin, String name, String description, String image, double price, Date start_date, Date end_date, int flagActive, Date createdAt, int idSpace) {
             this.id = id;
             this.admin = admin;
             this.name = name;
@@ -126,11 +126,11 @@ import java.util.Date;
             return this;
         }
 
-        public boolean isFlagActive() {
+        public int getFlagActive() {
             return flagActive;
         }
 
-        public Ads setFlagActive(boolean flagActive) {
+        public Ads setFlagActive(int flagActive) {
             this.flagActive = flagActive;
             return this;
         }

@@ -1,6 +1,7 @@
 package pe.edu.utp.micunatruck.models;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
 
 public class MicunaTruckService {
@@ -9,6 +10,7 @@ public class MicunaTruckService {
     private UsersEntity usersEntity;
     private EventsEntity eventsEntity;
     private UserTypeEntity userTypeEntity;
+    private AdsEntity adsEntity;
 
     public Connection getConnection() {
         return connection;
@@ -27,6 +29,16 @@ public class MicunaTruckService {
             }
         }
         return usersEntity;
+    }
+
+    protected AdsEntity getAdsEntity(){
+        if (getConnection()!=null){
+            if (adsEntity==null){
+                adsEntity=new AdsEntity();
+                adsEntity.setConnection(getConnection());
+            }
+        }
+        return adsEntity;
     }
 
     public List<User> findAllUsers() {
@@ -92,4 +104,33 @@ public class MicunaTruckService {
     public UserType findUserTypeById(int id){
         return getUsersTypeEntity() != null ? getUsersTypeEntity().findById(id) : null;
     }
+
+    public List<Ads> findAllAds(){
+        return getAdsEntity()!=null?
+                getAdsEntity().findAll(getAdminsEntity()):null;
+    }
+
+    public Ads findAdsById(int id){
+        return getAdsEntity()!=null?getAdsEntity().findById(id,getAdminsEntity()):null;
+    }
+
+    public Ads findAdsBySpace(int idspace){
+        return getAdsEntity()!=null?getAdsEntity().findBySpace(idspace,getAdminsEntity()):null;
+    }
+
+    public Ads createAds(int idadmin, String name, String description, String image, Double price,
+                         Date start_date,Date end_date,int idspace){
+        return getAdsEntity()!=null?getAdsEntity().create(idadmin,name,description,image,price,start_date,end_date,
+                idspace,getAdminsEntity()):null;
+    }
+
+    public boolean updateAds(int id, String name, String description, String image, Double price,
+                             Date start_date, Date end_date, int flag_active, int idspace){
+        return getAdsEntity()!=null?getAdsEntity().update(id,name,description,image,price,start_date,end_date,flag_active,idspace,getAdminsEntity()):false;
+    }
+
+    public boolean deleteAds(int id){
+        return getAdsEntity()!=null?getAdsEntity().delete(id):false;
+    }
+
 }
