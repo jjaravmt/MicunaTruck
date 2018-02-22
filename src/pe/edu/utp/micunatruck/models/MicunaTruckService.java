@@ -11,6 +11,7 @@ public class MicunaTruckService {
     private EventsEntity eventsEntity;
     private UserTypeEntity userTypeEntity;
     private AdsEntity adsEntity;
+    private AdminsEntity adminsEntity;
 
     public Connection getConnection() {
         return connection;
@@ -132,5 +133,22 @@ public class MicunaTruckService {
     public boolean deleteAds(int id){
         return getAdsEntity()!=null?getAdsEntity().delete(id):false;
     }
+
+
+    /* ADMIN */
+
+    protected AdminsEntity getAdminsEntity(){
+        if (getConnection()!=null){
+            if (adminsEntity==null){
+                adminsEntity=new AdminsEntity();
+                adminsEntity.setConnection(getConnection());
+            }
+        }
+        return adminsEntity;
+    }
+
+
+
+
 
 }
