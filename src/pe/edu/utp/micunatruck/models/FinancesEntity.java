@@ -40,7 +40,7 @@ public class FinancesEntity extends BaseEntity {
     public List<Finance> findAll(){
         return findByCriteria(DEFAULT_SQL);
     }
-
+    ///listFinance
     public Finance findById(int id){
         List<Event> events = findByCriteria(DEFAULT_SQL + " WHERE id = " +
                 String.valueOf(id));
