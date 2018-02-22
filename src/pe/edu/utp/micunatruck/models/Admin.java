@@ -11,25 +11,25 @@ public class Admin {
     private String photo;
     private String email;
     private String password;
-    private boolean flag_active;
-    private Date update_at;
-    private Date deleted_at;
-    private Date created_at;
+    private boolean flagActive;
+    private Date updateAt;
+    private Date deletedAt;
+    private Date createdAt;
 
     public Admin() {
     }
 
-    public Admin(int id, String name, String lastName, String photo, String email, String password, boolean flag_active, Date update_at, Date deleted_at, Date created_at) {
+    public Admin(int id, String name, String lastName, String photo, String email, String password, boolean flagActive, Date updateAt, Date deletedAt, Date createdAt) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.photo = photo;
         this.email = email;
         this.password = password;
-        this.flag_active = flag_active;
-        this.update_at = update_at;
-        this.deleted_at = deleted_at;
-        this.created_at = created_at;
+        this.flagActive = flagActive;
+        this.updateAt = updateAt;
+        this.deletedAt = deletedAt;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -86,39 +86,39 @@ public class Admin {
         return this;
     }
 
-    public boolean getFlag_active() {
-        return flag_active;
+    public boolean isFlagActive() {
+        return flagActive;
     }
 
-    public Admin setFlag_active(boolean flag_active) {
-        this.flag_active = flag_active;
+    public Admin setFlagActive(boolean flagActive) {
+        this.flagActive = flagActive;
         return this;
     }
 
-    public Date getUpdate_at() {
-        return update_at;
+    public Date getUpdateAt() {
+        return updateAt;
     }
 
-    public Admin setUpdate_at(Date update_at) {
-        this.update_at = update_at;
+    public Admin setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
         return this;
     }
 
-    public Date getDeleted_at() {
-        return deleted_at;
+    public Date getDeletedAt() {
+        return deletedAt;
     }
 
-    public Admin setDeleted_at(Date deleted_at) {
-        this.deleted_at = deleted_at;
+    public Admin setDeletedAt(Date deletedAt) {
+        this.deletedAt = deletedAt;
         return this;
     }
 
-    public Date getCreated_at() {
-        return created_at;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public Admin setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public Admin setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
         return this;
     }
 }
