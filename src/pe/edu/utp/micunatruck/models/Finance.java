@@ -17,7 +17,9 @@ public class Finance {
 
     }
 
-    public Finance(int id, int origin_id, int origin_type_id, double amount, Date start_date, Date end_date, boolean flag_active, Date update_at, Date deleted_at, Date created_at) {
+    public Finance(int id, int origin_id,
+                   int origin_type_id, double amount, Date start_date, Date end_date,
+                   boolean flag_active, Date update_at, Date deleted_at, Date created_at) {
         this.id = id;
         this.origin_id = origin_id;
         this.origin_type_id = origin_type_id;

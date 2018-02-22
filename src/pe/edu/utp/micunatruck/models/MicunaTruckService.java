@@ -9,6 +9,7 @@ public class MicunaTruckService {
     private UsersEntity usersEntity;
     private EventsEntity eventsEntity;
     private UserTypeEntity userTypeEntity;
+    private AdminsEntity adminsEntity;
 
     public Connection getConnection() {
         return connection;
@@ -109,4 +110,18 @@ public class MicunaTruckService {
         return getEventsEntity() != null ?
                 getEventsEntity().update(event, user, eventStatus) : false;
     }
+
+    /* ADMIN */
+
+    protected AdminsEntity getAdminsEntity(){
+        if (getConnection()!=null){
+            if (adminsEntity==null){
+                adminsEntity=new AdminsEntity();
+                adminsEntity.setConnection(getConnection());
+            }
+        }
+        return adminsEntity;
+    }
+
+
 }

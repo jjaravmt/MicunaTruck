@@ -49,10 +49,7 @@ public class AdsEntity extends BaseEntity {
         return findByCriteria(DEFAULT_SQL,adminsEntity);
     }
 
-    public Ads findById(int id,AdminsEntity adminsEntity){
-        List<Ads> adsRs=findByCriteria(DEFAULT_SQL + "WHERE id="+String.valueOf(id),adminsEntity);
-        return (adsRs!=null?adsRs.get(0):null);
-    }
+
 
     public Ads findByNameSdEd(String name,Date start_date,Date end_date,AdminsEntity adminsEntity){
         List<Ads> adsRs=findByCriteria(DEFAULT_SQL+"WHERE start_date='"+start_date+"' and end_date='"+end_date+"'",adminsEntity);
