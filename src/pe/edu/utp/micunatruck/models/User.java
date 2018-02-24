@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class User {
     private int id;
-    private int userTypeId;
+    private UserType userType;
     private String name;
     private String lastName;
     private String legalName;
@@ -32,12 +32,12 @@ public class User {
     }
 
     public User(int id,
-                int userTypeId, String name, String lastName, String legalName,
+                UserType userType, String name, String lastName, String legalName,
                 String description, String photo, String address, String telephone,
                 String email, String password, boolean flagActive)
     {
         this.setId(id);
-        this.setUserTypeId(userTypeId);
+        this.setUserType(userType);
         this.setName(name);
         this.setLastName(lastName);
         this.setLegalName(legalName);
@@ -59,12 +59,12 @@ public class User {
         return this;
     }
 
-    public int getUserTypeId() {
-        return userTypeId;
+    public UserType getUserType() {
+        return userType;
     }
 
-    public User setUserTypeId(int userTypeId) {
-        this.userTypeId = userTypeId;
+    public User setUserType(UserType userType) {
+        this.userType = userType;
         return this;
     }
 
