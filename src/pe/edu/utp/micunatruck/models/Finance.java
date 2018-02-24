@@ -35,6 +35,16 @@ public class Finance {
         this.createdAt = createdAt;
     }
 
+    public Finance(int id, int originId, int originTypeId, double amount, Date startDate, Date endDate,
+                   boolean flagActive) {
+        this.id = id;
+        this.originId = originId;
+        this.originTypeId = originTypeId;
+        this.amount = amount;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.flagActive = flagActive;
+    }
 
     public int getId() {
         return id;
