@@ -100,7 +100,7 @@ public class Finance {
         return this;
     }
 
-    public boolean isFlagActive() {
+    public boolean getFlagActive() {
         return flagActive;
     }
 

@@ -1,5 +1,5 @@
 package pe.edu.utp.micunatruck.beans;
-import pe.edu.utp.micunatruck.models.EventStatus;
+
 import pe.edu.utp.micunatruck.models.MicunaTruckService;
 import pe.edu.utp.micunatruck.models.Admin;
 import pe.edu.utp.micunatruck.models.User;
