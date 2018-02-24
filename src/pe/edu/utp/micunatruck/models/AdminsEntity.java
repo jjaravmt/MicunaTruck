@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class AdminsEntity extends BaseEntity {
-    private static String DEFAULT_SQL = "SELECT * FROM micunatruck.users ";
+    private static String DEFAULT_SQL = "SELECT * FROM micunatruck.admins ";
+    private static String DEFAULT_SQL_UPDATE = "UPDATE micunatruck.admins SET ";
 
     public Admin findById(int id){
         List<Admin> adsRs=findByCriteria(DEFAULT_SQL + "WHERE id="+String.valueOf(id));
@@ -46,6 +47,30 @@ public class AdminsEntity extends BaseEntity {
             }
         }
         return null;
+    }
+
+    public boolean update(Admin admin){
+        String sql = DEFAULT_SQL_UPDATE +
+                "id = " + admin.getId() + ", " +
+                "name = '" + admin.getName() + "', " +
+                "lastname = '" + admin.getLastName() + "', " +
+                "photo = '" + admin.getPhoto() + "', " +
+                "email = '" + admin.getEmail() + "', " +
+                "password = '" + admin.getPassword() + "', " +
+                "updated_at = NOW() " +
+                "WHERE id = " + String.valueOf(admin.getId());
+        return updateByCriteria(sql) > 0;
+    }
+
+    private int updateByCriteria(String sql){
+        if(getConnection() != null){
+            try {
+                return getConnection().createStatement().executeUpdate(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
     }
 
 
