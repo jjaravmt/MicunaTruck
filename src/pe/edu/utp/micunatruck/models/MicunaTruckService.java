@@ -87,6 +87,21 @@ public class MicunaTruckService {
         return getEventsEntity() != null ? getEventsEntity().findAll() : null;
     }
 
+    public Event createEvent(User user, EventStatus eventStatus, String name, String description, String image) {
+        return getEventsEntity() != null ?
+                getEventsEntity().create(user, eventStatus, name, description, image) : null;
+    }
+
+    public boolean deleteEvent(int id) {
+        return getEventsEntity() != null ?
+                getEventsEntity().delete(id) : false;
+    }
+
+    public boolean updateEvent(Event event, User user, EventStatus eventStatus) {
+        return getEventsEntity() != null ?
+                getEventsEntity().update(event, user, eventStatus) : false;
+    }
+
     /* USER TYPE */
     public UserTypeEntity getUsersTypeEntity() {
         if(getConnection() != null){
@@ -106,6 +121,8 @@ public class MicunaTruckService {
         return getUsersTypeEntity() != null ? getUsersTypeEntity().findById(id) : null;
     }
 
+
+    /*ADS*/
     public List<Ads> findAllAds(){
         return getAdsEntity()!=null?
                 getAdsEntity().findAll(getAdminsEntity()):null;
@@ -134,26 +151,7 @@ public class MicunaTruckService {
         return getAdsEntity()!=null?getAdsEntity().delete(id):false;
     }
 
-
-
-
-    public Event createEvent(User user, EventStatus eventStatus, String name, String description, String image) {
-        return getEventsEntity() != null ?
-                getEventsEntity().create(user, eventStatus, name, description, image) : null;
-    }
-
-    public boolean deleteEvent(int id) {
-        return getEventsEntity() != null ?
-                getEventsEntity().delete(id) : false;
-    }
-
-    public boolean updateEvent(Event event, User user, EventStatus eventStatus) {
-        return getEventsEntity() != null ?
-                getEventsEntity().update(event, user, eventStatus) : false;
-    }
-
     /* ADMIN */
-
     protected AdminsEntity getAdminsEntity(){
         if (getConnection()!=null){
             if (adminsEntity==null){
@@ -163,9 +161,4 @@ public class MicunaTruckService {
         }
         return adminsEntity;
     }
-
-
-
-
-
 }

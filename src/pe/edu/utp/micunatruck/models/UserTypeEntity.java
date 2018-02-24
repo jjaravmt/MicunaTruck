@@ -1,3 +1,10 @@
+/*
+ * Created by MIGUEL ANGEL POMA HINOSTROZA
+ * Date:
+ * Time:
+ * Description:
+ * */
+
 package pe.edu.utp.micunatruck.models;
 
 import java.sql.ResultSet;

@@ -1,9 +1,15 @@
+/*
+ * Created by MIGUEL ANGEL POMA HINOSTROZA
+ * Date:
+ * Time:
+ * Description:
+ * */
+
 package pe.edu.utp.micunatruck.models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class UsersEntity extends BaseEntity {
