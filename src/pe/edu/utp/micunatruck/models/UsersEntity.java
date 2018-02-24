@@ -16,7 +16,7 @@ public class UsersEntity extends BaseEntity {
     private static String DEFAULT_SQL = "SELECT * FROM micunatruck.users ";
     private static String DEFAULT_SQL_UPDATE = "UPDATE micunatruck.users SET ";
 
-    private List<User> findByCriteria(String sql)
+    private List<User> findByCriteria(String sql, UserTypeEntity userTypeEntity)
     {
         List<User> users = null;
         boolean indHasData = false;
@@ -29,7 +29,7 @@ public class UsersEntity extends BaseEntity {
                     indHasData = true;
                     User region = new User()
                             .setId(resultSet.getInt("id"))
-                            .setUserTypeId(resultSet.getInt("user_type_id"))
+                            .setUserType(userTypeEntity.findById(resultSet.getInt("user_type_id")))
                             .setName(resultSet.getString("name"))
                             .setLastName(resultSet.getString("lastname"))
                             .setLegalName(resultSet.getString("legal_name"))
@@ -56,23 +56,23 @@ public class UsersEntity extends BaseEntity {
     }
 
     public List<User> findAll(){
-        return findByCriteria(DEFAULT_SQL + "WHERE flag_active = 1");
+        return findByCriteria(DEFAULT_SQL + "WHERE flag_active = 1", new UserTypeEntity());
     }
 
     public User findById(int id){
-        List<User> users = findByCriteria(DEFAULT_SQL + " WHERE flag_active = 1 AND id = " + String.valueOf(id));
+        List<User> users = findByCriteria(DEFAULT_SQL + " WHERE flag_active = 1 AND id = " + String.valueOf(id), new UserTypeEntity());
         return (users) != null ? users.get(0) : null;
     }
 
     public User findUserByEmailAndPassword(String email, String password){
         List<User> users = findByCriteria(DEFAULT_SQL +
                                             " WHERE flag_active = 1 AND email = '" + email + "'" +
-                                            " AND password = '" + password + "'");
+                                            " AND password = '" + password + "'", new UserTypeEntity());
         return (users) != null ? users.get(0) : null;
     }
 
     public User findByName(String name){
-        List<User> users = findByCriteria(DEFAULT_SQL + " WHERE name LIKE '%" + name + "%'");
+        List<User> users = findByCriteria(DEFAULT_SQL + " WHERE name LIKE '%" + name + "%'", new UserTypeEntity());
         return (users != null) ? users.get(0) : null;
     }
 
@@ -87,7 +87,7 @@ public class UsersEntity extends BaseEntity {
         return 0;
     }
 
-    public User create(int userTypeId, String name, String lastName, String legalName,
+    public User create(UserType userType, String name, String lastName, String legalName,
                        String description, String photo, String address, String telephone,
                        String email, String password, boolean flagActive){
         if(findByName(name) == null){
@@ -97,7 +97,7 @@ public class UsersEntity extends BaseEntity {
                             "user_type_id, name, lastname, legal_name, description, photo, " +
                             "address, telephone, email, password, flag_active, created_at) " +
                         "VALUES("
-                            + String.valueOf(userTypeId)
+                            + String.valueOf(userType.getId())
                             + ",'" + name + "'"
                             + ",'" + lastName + "'"
                             + ",'" + legalName + "'"
@@ -129,9 +129,9 @@ public class UsersEntity extends BaseEntity {
         return updateByCriteria("DELETE FROM micunatruck.users WHERE name = '" +  name + "'") > 0;
     }*/
 
-    public boolean update(User user){
+    public boolean update(User user, UserType userType){
         String sql = DEFAULT_SQL_UPDATE +
-                "user_type_id = " + user.getUserTypeId() + ", " +
+                "user_type_id = " + userType.getId() + ", " +
                 "name = '" + user.getName() + "', " +
                 "lastname = '" + user.getLastName() + "', " +
                 "legal_name = '" + user.getLegalName() + "', " +
