@@ -32,16 +32,6 @@ public class MicunaTruckService {
         return usersEntity;
     }
 
-    protected AdsEntity getAdsEntity(){
-        if (getConnection()!=null){
-            if (adsEntity==null){
-                adsEntity=new AdsEntity();
-                adsEntity.setConnection(getConnection());
-            }
-        }
-        return adsEntity;
-    }
-
     public List<User> findAllUsers() {
         return getUsersEntity() != null ? getUsersEntity().findAll() : null;
     }
@@ -54,10 +44,10 @@ public class MicunaTruckService {
         return getUsersEntity() != null ? getUsersEntity().findUserByEmailAndPassword(email, password) : null;
     }
 
-    public User createUser(int userTypeId, String name, String lastName, String legalName,
+    public User createUser(UserType userType, String name, String lastName, String legalName,
                            String description, String photo, String address, String telephone,
                            String email, String password, boolean flagActive){
-        return getUsersEntity() != null ? getUsersEntity().create(userTypeId, name, lastName, legalName,
+        return getUsersEntity() != null ? getUsersEntity().create(userType, name, lastName, legalName,
                 description, photo, address, telephone,
                 email, password, flagActive) : null;
     }
@@ -67,9 +57,9 @@ public class MicunaTruckService {
                 getUsersEntity().delete(id) : false;
     }
 
-    public boolean updateUser(User user){
+    public boolean updateUser(User user, UserType userType){
         return getUsersEntity() != null ?
-                getUsersEntity().update(user) : false;
+                getUsersEntity().update(user, userType) : false;
     }
 
     /* EVENTS */
@@ -123,6 +113,16 @@ public class MicunaTruckService {
 
 
     /*ADS*/
+    protected AdsEntity getAdsEntity(){
+        if (getConnection()!=null){
+            if (adsEntity==null){
+                adsEntity=new AdsEntity();
+                adsEntity.setConnection(getConnection());
+            }
+        }
+        return adsEntity;
+    }
+
     public List<Ads> findAllAds(){
         return getAdsEntity()!=null?
                 getAdsEntity().findAll(getAdminsEntity()):null;
