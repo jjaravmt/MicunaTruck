@@ -16,7 +16,6 @@ public class AdsBean implements Serializable {
     private MicunaTruckService micunaTruckService;
     private Ads ads;
 
-
     public AdsBean() {
         micunaTruckService=new MicunaTruckService();
     }
@@ -26,7 +25,7 @@ public class AdsBean implements Serializable {
     }
 
     public Ads getAds(){
-        return Ads;
+        return ads;
     }
 
     public void setAds(Ads ads){
