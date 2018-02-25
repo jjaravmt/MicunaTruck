@@ -74,4 +74,6 @@ public class AdminsBean implements Serializable {
         this.getAdmin().setPassword(password);
     }
 
+
+
 }

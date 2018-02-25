@@ -152,7 +152,7 @@ public class MicunaTruckService {
     }
 
     /* ADMIN */
-    protected AdminsEntity getAdminsEntity(){
+    private AdminsEntity getAdminsEntity(){
         if (getConnection()!=null){
             if (adminsEntity==null){
                 adminsEntity=new AdminsEntity();
@@ -161,4 +161,15 @@ public class MicunaTruckService {
         }
         return adminsEntity;
     }
+
+    public Admin createAdmin(String name, String lastName, String photo, String email, String password, boolean flagActive) {
+        return getAdminsEntity() != null ?
+                getAdminsEntity().create(name,lastName,photo,email,password,flagActive) : null;
+    }
+
+    public boolean updateAdmin( Admin admin){
+        return getAdminsEntity()!= null ?
+                getAdminsEntity().update(admin):false;
+    }
+
 }

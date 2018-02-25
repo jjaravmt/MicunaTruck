@@ -86,7 +86,7 @@ public class Admin {
         return this;
     }
 
-    public boolean isFlagActive() {
+    public boolean getFlagActive() {
         return flagActive;
     }
 
