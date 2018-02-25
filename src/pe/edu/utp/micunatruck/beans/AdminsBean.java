@@ -74,6 +74,25 @@ public class AdminsBean implements Serializable {
         this.getAdmin().setPassword(password);
     }
 
+    public boolean getFlagActive() {
+        return this.getAdmin().getFlagActive();
+    }
 
+    public void setFlagActive(boolean flagActive) {
+        this.getAdmin().setFlagActive(flagActive);
+    }
+
+
+
+    public String createAdmin() {
+        micunaTruckService.createAdmin(this.getName(), this.getLastName(), this.getPhoto(),
+                this.getEmail(),this.getPassword(),this.getFlagActive());
+        return "success";
+    }
+
+    public String updateAdmin() {
+        micunaTruckService.updateAdmin(this.getAdmin());
+        return "success";
+    }
 
 }
