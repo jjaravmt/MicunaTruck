@@ -66,8 +66,8 @@ public class UsersEntity extends BaseEntity {
 
     public User findUserByEmailAndPassword(String email, String password){
         List<User> users = findByCriteria(DEFAULT_SQL +
-                                            " WHERE flag_active = 1 AND email = '" + email + "'" +
-                                            " AND password = '" + password + "'", new UserTypeEntity());
+                " WHERE flag_active = 1 AND email = '" + email + "'" +
+                " AND password = '" + password + "'", new UserTypeEntity());
         return (users) != null ? users.get(0) : null;
     }
 
@@ -94,22 +94,22 @@ public class UsersEntity extends BaseEntity {
             if(getConnection() != null){
                 String sql =
                         "INSERT INTO micunatruck.users(" +
-                            "user_type_id, name, lastname, legal_name, description, photo, " +
-                            "address, telephone, email, password, flag_active, created_at) " +
-                        "VALUES("
-                            + String.valueOf(userType.getId())
-                            + ",'" + name + "'"
-                            + ",'" + lastName + "'"
-                            + ",'" + legalName + "'"
-                            + ",'" + description + "'"
-                            + ",'" + photo + "'"
-                            + ",'" + address + "'"
-                            + ",'" + telephone + "'"
-                            + ",'" + email + "'"
-                            + ",'" + password + "'"
-                            + "," +  String.valueOf(flagActive ? 1 : 0)
-                            + ", NOW()"
-                        + ")";
+                                "user_type_id, name, lastname, legal_name, description, photo, " +
+                                "address, telephone, email, password, flag_active, created_at) " +
+                                "VALUES("
+                                + 1 //+ String.valueOf(userType.getId())
+                                + ",'" + name + "'"
+                                + "," + (lastName == null ? "null": "'" + lastName + "'")
+                                + "," + (legalName == null ? "null": "'" + legalName + "'")
+                                + "," + (description == null ? "null": "'" + description + "'")
+                                + "," + (photo == null ? "null": "'" + photo + "'")
+                                + "," + (address == null ? "null": "'" + address + "'")
+                                + "," + (telephone == null ? "null": "'" + telephone + "'")
+                                + ",'" + email + "'"
+                                + ",'" + password + "'"
+                                + "," +  String.valueOf(flagActive ? 1 : 0)
+                                + ", NOW()"
+                                + ")";
                 int results = updateByCriteria(sql);
                 if(results > 0){
                     User region = new User();
