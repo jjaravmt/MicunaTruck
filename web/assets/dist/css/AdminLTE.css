@@ -3251,7 +3251,7 @@ table.text-center th {
 .login-box,
 .register-box {
   width: 360px;
-  margin: 7% auto;
+  margin: 3% auto;
 }
 @media (max-width: 768px) {
   .login-box,
@@ -3271,6 +3271,12 @@ table.text-center th {
 .register-box-body .form-control-feedback {
   color: #777;
 }
+
+.register-box-body select{
+  padding-left: 7px;
+  color: #999999;
+}
+
 .login-box-msg,
 .register-box-msg {
   margin: 0;
