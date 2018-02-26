@@ -1,7 +1,6 @@
 package pe.edu.utp.micunatruck.models;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +33,7 @@ public class AdsEntity extends BaseEntity {
                             resultSet.getDate("deleted_at"),
                             resultSet.getDate("updated_at"),
                             resultSet.getDate("created_at"),
-                            resultSet.getInt("idSpace"));
+                            resultSet.getInt("code_space"));
                     adsRs.add(ads);
                 }
                 return adsRs;
@@ -51,17 +50,17 @@ public class AdsEntity extends BaseEntity {
 
     public Ads findById(int id,AdminsEntity adminsEntity){
         List<Ads> adsRs=findByCriteria(DEFAULT_SQL + "WHERE id="+String.valueOf(id),adminsEntity);
-        return (adsRs!=null?adsRs.get(0):null);
+        return (adsRs!=null && !adsRs.isEmpty() ?adsRs.get(0):null);
     }
 
-    public Ads findInfoDuplicate(int id,Date start_date,Date end_date,int idspace,int action,AdminsEntity adminsEntity){
+    public Ads findInfoDuplicate(int id,Date start_date,Date end_date,int code_space,int action,AdminsEntity adminsEntity){
         if (action==0){
             //INSERT
-            List<Ads> adsRs=findByCriteria(DEFAULT_SQL+"WHERE idspace="+idspace+" AND (start_date>='"+start_date+"' AND end_date<='"+end_date+"') AND flag_active=1",adminsEntity);
+            List<Ads> adsRs=findByCriteria(DEFAULT_SQL+"WHERE code_space="+code_space+" AND (start_date>='"+start_date+"' AND end_date<='"+end_date+"') AND flag_active=1",adminsEntity);
             return (adsRs!=null?adsRs.get(0):null);
         }else if (action==1){
             //UPDATE
-            List<Ads> adsRs=findByCriteria(DEFAULT_SQL+"WHERE idspace="+idspace+" AND (start_date='"+start_date+"' AND end_date='"+end_date+"') AND id<>"+id+" AND flag_active=1",adminsEntity);
+            List<Ads> adsRs=findByCriteria(DEFAULT_SQL+"WHERE code_space="+code_space+" AND (start_date='"+start_date+"' AND end_date='"+end_date+"') AND id<>"+id+" AND flag_active=1",adminsEntity);
             return (adsRs!=null?adsRs.get(0):null);
         }
         return null;
@@ -95,26 +94,26 @@ public class AdsEntity extends BaseEntity {
         return 0;
     }
 
-    public Ads findBySpace(int idspace,AdminsEntity adminsEntity){
-        List<Ads> adsRs=findByCriteria(DEFAULT_SQL+"WHERE idspace="+idspace+" AND " +
+    public Ads findBySpace(int code_space,AdminsEntity adminsEntity){
+        List<Ads> adsRs=findByCriteria(DEFAULT_SQL+"WHERE code_space="+code_space+" AND " +
                 "flag_active=1 AND (start_date>=NOW() AND end_date<=NOW())",adminsEntity);
         return (adsRs!=null?adsRs.get(0):null);
     }
 
     public Ads create(int idadmin,String name,String description,
                       String image,Double price,Date start_date,Date end_date,
-                      int idspace, AdminsEntity adminsEntity){
+                      int code_space, AdminsEntity adminsEntity){
 
-        if (findInfoDuplicate(0,start_date,end_date,idspace,0,adminsEntity)==null){
+        if (findInfoDuplicate(0,start_date,end_date,code_space,0,adminsEntity)==null){
             if (getConnection()!=null){
                 int id=getMaxId()+1;
-                String sql="INSERT INTO ads(id,admin_id,name,description,image,price,flag_active,start_date,end_date,created_at,idspace)" +
-                        "values("+id+","+idadmin+",'"+name+"','"+description+"','"+image+"',"+price+",1,'"+start_date+"','"+end_date+"',NOW(),"+idspace+")";
+                String sql="INSERT INTO ads(id,admin_id,name,description,image,price,flag_active,start_date,end_date,created_at,code_space)" +
+                        "values("+id+","+idadmin+",'"+name+"','"+description+"','"+image+"',"+price+",1,'"+start_date+"','"+end_date+"',NOW(),"+code_space+")";
 
                 int results=updateByCriteria(sql);
                 if (results>0){
                     Ads ads=new Ads(id,adminsEntity.findById(idadmin),name,description,image,price,
-                            start_date,end_date,1,findById(id,adminsEntity).getCreatedAt(),idspace);
+                            start_date,end_date,1,findById(id,adminsEntity).getCreatedAt(),code_space);
                     return ads;
                 }
             }
@@ -125,12 +124,12 @@ public class AdsEntity extends BaseEntity {
 
     public boolean update(int id,String name,String description,
                           String image,Double price,Date start_date, Date end_date,
-                          int flag_active,int idspace,AdminsEntity adminsEntity){
-        if (findInfoDuplicate(id,start_date,end_date,idspace,1,adminsEntity)==null){
+                          int flag_active,int code_space,AdminsEntity adminsEntity){
+        if (findInfoDuplicate(id,start_date,end_date,code_space,1,adminsEntity)==null){
             if (getConnection()!=null){
                 String sql="UPDATE ads SET name='"+name+"',description='"+description+"',image='"+image+"',price="+price+"," +
                         "start_date='"+start_date+"',end_date='"+end_date+"' flag_active="+ flag_active +","+
-                        "updated_at=NOW(),idspace="+idspace+" WHERE id="+id;
+                        "updated_at=NOW(),code_space="+code_space+" WHERE id="+id;
                 return updateByCriteria(sql)>0;
             }
         }

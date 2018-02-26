@@ -10,17 +10,20 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+
 @Named
 @SessionScoped
 public class AdsBean implements Serializable {
     private MicunaTruckService micunaTruckService;
     private Ads ads;
 
+
     public AdsBean() {
         micunaTruckService=new MicunaTruckService();
     }
 
     public List<Ads> getAdsRs(){
+        micunaTruckService=new MicunaTruckService();
         return micunaTruckService.findAllAds();
     }
 
@@ -80,8 +83,8 @@ public class AdsBean implements Serializable {
         return this.getAds().getUpdatedAt();
     }
 
-    public int getIdSpace(){
-        return this.getAds().getIdSpace();
+    public int getcodespace(){
+        return this.getAds().getCodeSpace();
     }
 
     public String editAds(Ads ads){
@@ -96,13 +99,13 @@ public class AdsBean implements Serializable {
 
     public String createAds(){
         micunaTruckService.createAds(getAdmin().getId(),getName(),
-                getDescription(),getImage(),getPrice(),getStartDate(),getEndDate(),getIdSpace());
+                getDescription(),getImage(),getPrice(),getStartDate(),getEndDate(),getcodespace());
         return "success";
     }
 
     public String updateAds(){
         micunaTruckService.updateAds(getId(),getName(),getDescription(),getImage(),getPrice(),
-                getStartDate(),getEndDate(),getFlagActive(),getIdSpace());
+                getStartDate(),getEndDate(),getFlagActive(),getcodespace());
         return "success";
     }
 

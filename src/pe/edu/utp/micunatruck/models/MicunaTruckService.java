@@ -1,6 +1,10 @@
 package pe.edu.utp.micunatruck.models;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +17,16 @@ public class MicunaTruckService {
     private AdsEntity adsEntity;
     private AdminsEntity adminsEntity;
 
-    public Connection getConnection() {
+
+    private Connection getConnection() {
+        if (connection==null){
+            try {
+                connection=((DataSource) InitialContext.doLookup("jdbc/MySQLDataSource"))
+                        .getConnection();
+            } catch (SQLException | NamingException e) {
+                e.printStackTrace();
+            }
+        }
         return connection;
     }
 
