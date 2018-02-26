@@ -49,7 +49,12 @@ public class UserTypeEntity extends BaseEntity {
     }
 
     public List<UserType> findAll(){
-        return findByCriteria(DEFAULT_SQL + "WHERE flag_active = 1");
+        try{
+            return findByCriteria(DEFAULT_SQL + "WHERE flag_active = 1");
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return  null;
+        }
     }
 
     public UserType findById(int id){
