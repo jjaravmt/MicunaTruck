@@ -97,7 +97,7 @@ public class UsersEntity extends BaseEntity {
                                 "user_type_id, name, lastname, legal_name, description, photo, " +
                                 "address, telephone, email, password, flag_active, created_at) " +
                                 "VALUES("
-                                + 1 //+ String.valueOf(userType.getId())
+                                + String.valueOf(userType.getId())
                                 + ",'" + name + "'"
                                 + "," + (lastName == null ? "null": "'" + lastName + "'")
                                 + "," + (legalName == null ? "null": "'" + legalName + "'")
