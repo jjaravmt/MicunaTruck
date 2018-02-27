@@ -7,6 +7,7 @@ import pe.edu.utp.micunatruck.models.UserType;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -15,8 +16,11 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpSession;
+
 
 @Named
+@ManagedBean
 @SessionScoped
 public class AuthBean implements Serializable {
 
@@ -93,7 +97,8 @@ public class AuthBean implements Serializable {
                 this.setMsjError("Incorrect email or password.");
                 return "error";
             }
-
+            HttpSession session = SessionUtils.getSession();
+            session.setAttribute("username", user);
             return "success";
         }
         catch(Exception e){
