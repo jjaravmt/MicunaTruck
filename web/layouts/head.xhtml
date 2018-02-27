@@ -55,7 +55,9 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <h:form>
+                                    <h:commandLink class="btn btn-default btn-flat" action="#{authBean.logout}" value="Cerrar sesión" />
+                                </h:form>
                             </div>
                         </li>
                     </ul>
