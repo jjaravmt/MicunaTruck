@@ -128,7 +128,7 @@ public class EventsBean implements Serializable{
 //            e.printStackTrace();
 //        }
 
-        service.createEvent(this.getUser(), this.getEventStatus(), this.getName(), this.getDescription(), this.getImage(), this.getEvent().getDate());
+        service.createEvent(this.getUser(), this.getEventStatus(), this.getName(), this.getDescription(), this.getImage(), this.getDate());
         return "success";
     }
 
