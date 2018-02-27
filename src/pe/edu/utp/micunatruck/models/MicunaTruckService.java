@@ -21,7 +21,7 @@ public class MicunaTruckService {
     private Connection getConnection() {
         if (connection==null){
             try {
-                connection=((DataSource) InitialContext.doLookup("jdbc/MySQLDataSource"))
+                connection=((DataSource) InitialContext.doLookup("jdbc/MySQLDataSourceMicunaTruck"))
                         .getConnection();
             } catch (SQLException | NamingException e) {
                 e.printStackTrace();
@@ -90,9 +90,9 @@ public class MicunaTruckService {
         return getEventsEntity() != null ? getEventsEntity().findAll() : null;
     }
 
-    public Event createEvent(User user, EventStatus eventStatus, String name, String description, String image) {
+    public Event createEvent(User user, EventStatus eventStatus, String name, String description, String image, Date date) {
         return getEventsEntity() != null ?
-                getEventsEntity().create(user, eventStatus, name, description, image) : null;
+                getEventsEntity().create(user, eventStatus, name, description, image, date) : null;
     }
 
     public boolean deleteEvent(int id) {
