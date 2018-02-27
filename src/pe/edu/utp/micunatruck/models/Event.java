@@ -2,6 +2,7 @@ package pe.edu.utp.micunatruck.models;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,13 +25,14 @@ public class Event {
 
     }
 
-    public Event(int id, User user, EventStatus eventStatus, String name, String description, String image, int flagActive){
+    public Event(int id, User user, EventStatus eventStatus, String name, String description, String image, int flagActive, String date){
         this.setId(id);
         this.setUser(user);
         this.setEventStatus(eventStatus);
         this.setName(name);
         this.setDescription(description);
         this.setImage(image);
+        this.setDate(date);
         this.setFlagActive(flagActive);
     }
 
@@ -125,15 +127,40 @@ public class Event {
         return date;
     }
 
+
+
     public Event setDate(String date) {
 
         Date dateParse = null;
+        boolean parseableEnter = false;
         try {
-            dateParse = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+            if(date != null && date != ""){
+                parseableEnter = true;
+                dateParse = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+            }
         } catch (ParseException e) {
+            //TODO: quitar este try catch
+            if(parseableEnter){
+                try {
+                    dateParse = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+                } catch (ParseException e1) {
+                    dateParse = null;
+                }
+            }
             e.printStackTrace();
         }
         this.date = dateParse;
         return this;
+    }
+
+    public String getDateParse(){
+        Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String date = "";
+        try{
+            date = formatter.format(this.getDate());
+        }catch (Exception e) {
+            date = "-";
+        }
+        return date;
     }
 }
