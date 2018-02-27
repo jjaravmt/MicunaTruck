@@ -68,6 +68,10 @@ public class EventsBean implements Serializable{
         return eventStatus;
     }
 
+    public String getEventStatusName(){
+        return eventStatus.getName();
+    }
+
     public void setEventStatus(EventStatus eventStatus) {
         this.eventStatus = eventStatus;
     }
