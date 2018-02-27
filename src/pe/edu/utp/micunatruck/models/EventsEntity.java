@@ -3,6 +3,8 @@ package pe.edu.utp.micunatruck.models;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -76,14 +78,20 @@ public class EventsEntity extends BaseEntity {
         return 0;
     }
 
-    public Event create(User user, EventStatus eventStatus, String name, String description, String image, Date date){
+    public Event create(User user, EventStatus eventStatus, String name, String description, String image, String date){
         if(getConnection() != null){
             Date createdAt = new Date();
+            Date dateDb  = null;
+            try {
+                dateDb = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             String sql = "INSERT INTO events(user_id, event_status_id, name, description, image, date, flag_active, updated_at) " +
-                    "VALUES("+1+","+1+",'"+name+"','"+description+"','"+image+"','"+(new Timestamp(date.getTime())).toString()+"',1,'"+(new Timestamp(createdAt.getTime())).toString()+"')";
+                    "VALUES("+1+","+1+",'"+name+"','"+description+"','"+image+"','"+(new Timestamp(dateDb.getTime())).toString()+"',1,'"+(new Timestamp(createdAt.getTime())).toString()+"')";
             int results = updateByCriteria(sql);
             if(results > 0){
-                Event event = new Event(getMaxId(), user, eventStatus, name, description, image, 1);
+                Event event = new Event(getMaxId(), user, eventStatus, name, description, image, 1, date);
                 return event;
             }
         }
