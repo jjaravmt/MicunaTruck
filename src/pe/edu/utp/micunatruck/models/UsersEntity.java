@@ -27,7 +27,7 @@ public class UsersEntity extends BaseEntity {
 
                 while (resultSet.next()){
                     indHasData = true;
-                    User region = new User()
+                    User user = new User()
                             .setId(resultSet.getInt("id"))
                             .setUserType(userTypeEntity.findById(resultSet.getInt("user_type_id")))
                             .setName(resultSet.getString("name"))
@@ -41,7 +41,7 @@ public class UsersEntity extends BaseEntity {
                             .setPassword(resultSet.getString("password"))
                             .setFlagActive(resultSet.getBoolean("flag_active"))
                             ;
-                    users.add(region);
+                    users.add(user);
                 }
 
                 if(!indHasData)
@@ -64,10 +64,10 @@ public class UsersEntity extends BaseEntity {
         return (users) != null ? users.get(0) : null;
     }
 
-    public User findUserByEmailAndPassword(String email, String password){
+    public User findUserByEmailAndPassword(String email, String password, UserTypeEntity userTypeEntity){
         List<User> users = findByCriteria(DEFAULT_SQL +
                 " WHERE flag_active = 1 AND email = '" + email + "'" +
-                " AND password = '" + password + "'", new UserTypeEntity());
+                " AND password = '" + password + "'", userTypeEntity);
         return (users) != null ? users.get(0) : null;
     }
 
