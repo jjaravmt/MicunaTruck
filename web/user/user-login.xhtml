@@ -31,12 +31,12 @@
             <h:form>
                 <div class="form-group has-feedback">
                     <h:inputText id="email" styleClass="form-control"
-                        value="#{userBean.email}" a:placeholder="Email"/>
+                                 value="#{authBean.email}" a:placeholder="Email"/>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"/>
                 </div>
                 <div class="form-group has-feedback">
                     <h:inputSecret id="password" styleClass="form-control"
-                        value="#{userBean.password}" a:placeholder="Password"/>
+                                   value="#{authBean.password}" a:placeholder="Password"/>
                     <span class="glyphicon glyphicon-lock form-control-feedback"/>
                 </div>
                 <b:row>
@@ -48,9 +48,15 @@
                         </div>
                     </div>
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <h:form>
+                            <h:commandButton styleClass="btn btn-primary btn-block btn-flat"
+                                             action="#{authBean.authentication}" value="Sign In"/>
+                        </h:form>
                     </div>
                 </b:row>
+                <div class="form-group has-feedback">
+                    <h:outputLabel value="#{authBean.msjError}"/>
+                </div>
             </h:form>
 
             <div class="social-auth-links text-center">

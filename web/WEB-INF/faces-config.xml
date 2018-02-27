@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <navigation-rule>
         <from-view-id>/home.xhtml</from-view-id>
@@ -12,7 +12,7 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
-            <from-action>#{userBean.signIn}</from-action>
+            <from-action>#{authBean.signIn}</from-action>
             <from-outcome>success</from-outcome>
             <to-view-id>/user/user-login.xhtml</to-view-id>
             <redirect/>
@@ -27,7 +27,13 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
-            <from-action>#{userBean.signIn}</from-action>
+            <from-action>#{userBean.createUser}</from-action>
+            <from-outcome>error</from-outcome>
+            <to-view-id>/user/user-register.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{authBean.signIn}</from-action>
             <from-outcome>success</from-outcome>
             <to-view-id>/user/user-login.xhtml</to-view-id>
             <redirect/>
@@ -36,10 +42,20 @@
     <navigation-rule>
         <from-view-id>/user/user-login.xhtml</from-view-id>
         <navigation-case>
+            <from-action>#{authBean.authentication}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{authBean.authentication}</from-action>
+            <from-outcome>error</from-outcome>
+            <to-view-id>/user/user-login.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-action>#{userBean.newUser}</from-action>
             <from-outcome>success</from-outcome>
             <to-view-id>/user/user-register.xhtml</to-view-id>
-            <redirect/>
         </navigation-case>
     </navigation-rule>
 

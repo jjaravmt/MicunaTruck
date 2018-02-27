@@ -54,7 +54,7 @@ public class MicunaTruckService {
     }
 
     public User findUserByEmailAndPassword(String email, String password){
-        return getUsersEntity() != null ? getUsersEntity().findUserByEmailAndPassword(email, password) : null;
+        return getUsersEntity() != null ? getUsersEntity().findUserByEmailAndPassword(email, password, getUsersTypeEntity()) : null;
     }
 
     public User createUser(UserType userType, String name, String lastName, String legalName,
