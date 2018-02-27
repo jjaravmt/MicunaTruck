@@ -159,6 +159,24 @@ public class UserBean implements Serializable {
         return "success";
     }
 
+    public String authentication() {
+        try{
+            //FacesContext context = FacesContext.getCurrentInstance();
+            this.setUser(micunaTruckService.findUserByEmailAndPassword(this.getEmail(), this.getPassword()));
+            if(getUser() == null) {
+                //this.setMsjError("Incorrect email or password.");
+                return "error";
+            }
+            //context.getExternalContext().getSessionMap().put("user", getUser());
+            return "success";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            //this.setMsjError("An error occurred. Please, contact the administrator.");
+            return  "error";
+        }
+    }
+
     public String newUser(){
         this.setUserType(new UserType());
         this.setUserTypes(micunaTruckService.getUsersTypeEntity().findAll());
