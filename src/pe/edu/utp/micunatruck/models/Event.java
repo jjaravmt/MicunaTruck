@@ -1,5 +1,9 @@
 package pe.edu.utp.micunatruck.models;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event {
@@ -11,6 +15,7 @@ public class Event {
     private String description;
     private String image;
     private int flagActive;
+    private Date date;
     private Date deleteAt;
     private Date updatedAt;
     private Date createdAt;
@@ -104,6 +109,31 @@ public class Event {
 
     public Event setEventStatus(EventStatus eventStatus) {
         this.eventStatus = eventStatus;
+        return this;
+    }
+
+    public Date getDate() {
+//        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        Date datee = null;
+//        try {
+//            datee = dateFormat.parse("23/09/2007");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        long time = datee.getTime();
+//        new Timestamp(time);
+        return date;
+    }
+
+    public Event setDate(String date) {
+
+        Date dateParse = null;
+        try {
+            dateParse = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.date = dateParse;
         return this;
     }
 }
