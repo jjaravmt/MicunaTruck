@@ -166,11 +166,6 @@ public class UserBean implements Serializable {
         this.getUser().setFlagActive(flagActive);
     }
 
-    /*public String signIn(){
-        this.setUser(new User());
-        return "success";
-    }*/
-
     public String newUser(){
         this.setUserType(new UserType());
         this.setUserTypes(micunaTruckService.getUsersTypeEntity().findAll());
