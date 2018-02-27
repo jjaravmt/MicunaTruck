@@ -23,5 +23,6 @@
     <orderEntry type="library" exported="" scope="PROVIDED" name="GlassFish 5.0.0 - JSF" level="application_server_libraries" />
     <orderEntry type="library" exported="" scope="PROVIDED" name="GlassFish 5.0.0" level="application_server_libraries" />
     <orderEntry type="library" exported="" name="BootsFaces1.2.0" level="project" />
+    <orderEntry type="library" name="BootsFaces 1.2.0" level="project" />
   </component>
 </module>
