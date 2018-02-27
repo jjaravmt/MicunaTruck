@@ -7,6 +7,7 @@ import pe.edu.utp.micunatruck.models.UserType;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -19,6 +20,9 @@ import java.util.List;
 @Named
 @SessionScoped
 public class UserBean implements Serializable {
+    @Inject
+    private AuthBean authBean;
+
     private MicunaTruckService micunaTruckService;
     private User user;
     private List<UserType> userTypes;
@@ -36,6 +40,14 @@ public class UserBean implements Serializable {
     protected void init() {
         micunaTruckService = new MicunaTruckService();
         micunaTruckService.setConnection(getConnection());
+    }
+
+    public AuthBean getAuthBean() {
+        return authBean;
+    }
+
+    public void setAuthBean(AuthBean authBean) {
+        this.authBean = authBean;
     }
 
     public List<User> getUsers() {
@@ -59,11 +71,11 @@ public class UserBean implements Serializable {
     }
 
     public void setUserTypeSelected(int id){
-        this.userType.setId(id);
+        this.getUserType().setId(id);
     }
 
     public int getUserTypeSelected(){
-        return this.userType.getId();
+        return this.getUserType().getId();
     }
 
     public void setUser(User user) {
@@ -154,28 +166,10 @@ public class UserBean implements Serializable {
         this.getUser().setFlagActive(flagActive);
     }
 
-    public String signIn(){
+    /*public String signIn(){
         this.setUser(new User());
         return "success";
-    }
-
-    public String authentication() {
-        try{
-            //FacesContext context = FacesContext.getCurrentInstance();
-            this.setUser(micunaTruckService.findUserByEmailAndPassword(this.getEmail(), this.getPassword()));
-            if(getUser() == null) {
-                //this.setMsjError("Incorrect email or password.");
-                return "error";
-            }
-            //context.getExternalContext().getSessionMap().put("user", getUser());
-            return "success";
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            //this.setMsjError("An error occurred. Please, contact the administrator.");
-            return  "error";
-        }
-    }
+    }*/
 
     public String newUser(){
         this.setUserType(new UserType());
