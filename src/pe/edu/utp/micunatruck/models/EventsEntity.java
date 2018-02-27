@@ -20,15 +20,21 @@ public class EventsEntity extends BaseEntity {
                 ResultSet resultSet = getConnection().createStatement()
                         .executeQuery(sql);
                 while (resultSet.next()){
-                    Event event = new Event()
-                            .setId(resultSet.getInt("id"))
-                            .setUser(usersEntity.findById(resultSet.getInt("user_id")))
-                            .setEventStatus(eventStatusEntity.findById(resultSet.getInt("event_status_id")))
-                            .setName(resultSet.getString("name"))
-                            .setDescription(resultSet.getString("description"))
-                            .setImage(resultSet.getString("image"))
-                            .setFlagActive(resultSet.getByte("flag_active"))
-                            ;//comentario
+//                    Event event = new Event()
+//                            .setId(resultSet.getInt("id"))
+//                            .setUser(usersEntity.findById(resultSet.getInt("user_id")))
+//                            .setEventStatus(eventStatusEntity.findById(resultSet.getInt("event_status_id")))
+//                            .setName(resultSet.getString("name"))
+//                            .setDescription(resultSet.getString("description"))
+//                            .setImage(resultSet.getString("image"))
+//                            .setDate(resultSet.getString("date"))
+//                            .setFlagActive(resultSet.getByte("flag_active"))
+//                            ;
+                    Event event = new Event(resultSet.getInt("id"), usersEntity.findById(resultSet.getInt("user_id")),
+                            eventStatusEntity.findById(resultSet.getInt("event_status_id")), resultSet.getString("name"),
+                            resultSet.getString("description"), resultSet.getString("image"), resultSet.getByte("flag_active"),
+                            resultSet.getString("date")
+                    );
                     events.add(event);
                 }
                 return events;
