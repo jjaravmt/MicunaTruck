@@ -63,9 +63,18 @@
 
 
     <!-- Left side column. contains the logo and sidebar -->
-    <ui:include src="_sidebar.xhtml">
-        <ui:param name="auth" value="event"></ui:param>
-    </ui:include>
+
+    <h:panelGroup rendered="#{userBean.authBean.user.userType.id == '1'}">
+        <ui:include src="_sidebar.xhtml">
+            <ui:param name="auth" value="event"></ui:param>
+        </ui:include>
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{userBean.authBean.user.userType.id == '2'}">
+        <ui:include src="event_sidebar.xhtml">
+            <ui:param name="auth" value="event"></ui:param>
+        </ui:include>
+    </h:panelGroup>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
