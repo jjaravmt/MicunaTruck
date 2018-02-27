@@ -49,7 +49,7 @@ public class EventsEntity extends BaseEntity {
 
     public Event findByName(String name){
         List<Event> events = findByCriteria(DEFAULT_SQL+ " WHERE name like '%" + name + "%'", new UsersEntity(), new EventStatusEntity());
-        return (events != null) ? events.get(0) : null;
+        return (events != null && !events.isEmpty()) ? events.get(0) : null;
     }
 
     private int getMaxId(){
@@ -76,17 +76,15 @@ public class EventsEntity extends BaseEntity {
         return 0;
     }
 
-    public Event create(User user, EventStatus eventStatus, String name, String description, String image){
-        if(findByName(name) == null){
-            if(getConnection() != null){
-                Date createdAt = new Date();
-                String sql = "INSERT INTO events(user_id, event_status_id, name, description, image, flag_active, updated_at, created_at) " +
-                        "VALUES("+user.getId()+","+eventStatus.getId()+",'"+name+"','"+description+"','"+image+"',0,'"+(new Timestamp(createdAt.getTime())).toString()+"','"+(new Timestamp(createdAt.getTime())).toString()+"')";
-                int results = updateByCriteria(sql);
-                if(results > 0){
-                    Event event = new Event(getMaxId(), user, eventStatus, name, description, image, 1);
-                    return event;
-                }
+    public Event create(User user, EventStatus eventStatus, String name, String description, String image, Date date){
+        if(getConnection() != null){
+            Date createdAt = new Date();
+            String sql = "INSERT INTO events(user_id, event_status_id, name, description, image, date, flag_active, updated_at) " +
+                    "VALUES("+1+","+1+",'"+name+"','"+description+"','"+image+"','"+(new Timestamp(date.getTime())).toString()+"',1,'"+(new Timestamp(createdAt.getTime())).toString()+"')";
+            int results = updateByCriteria(sql);
+            if(results > 0){
+                Event event = new Event(getMaxId(), user, eventStatus, name, description, image, 1);
+                return event;
             }
         }
         return null;
