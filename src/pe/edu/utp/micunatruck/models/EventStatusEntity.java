@@ -6,15 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventStatusEntity extends BaseEntity {
-    private static String DEFAULT_SQL = "SELECT * FROM micunatrucks.event_status";
+    private static String DEFAULT_SQL = "SELECT * FROM micunatruck.event_status";
     private List<EventStatus> findByCriteria(String sql) {
         List<EventStatus> eventStatus;
         if(getConnection() != null) {
             eventStatus = new ArrayList<>();
             try {
-                ResultSet resultSet = getConnection()
-                        .createStatement()
-                        .executeQuery(sql);
+                ResultSet resultSet = getConnection().createStatement().executeQuery(sql);
                 while (resultSet.next()) {
                     EventStatus region = new EventStatus()
                             .setId(resultSet.getInt("id"))
