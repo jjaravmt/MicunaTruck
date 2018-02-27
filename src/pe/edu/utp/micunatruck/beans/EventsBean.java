@@ -7,17 +7,38 @@ import pe.edu.utp.micunatruck.models.Event;
 import pe.edu.utp.micunatruck.models.User;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.Part;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Timestamp;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.List;
+
+
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.PartialResponseWriter;
 
 @Named
 @SessionScoped
+//@ManagedBean
+//@ViewScoped
 public class EventsBean implements Serializable{
     private MicunaTruckService service;
     private Event event;
     private User user;
     private EventStatus eventStatus;
+//    private Part uploadedImage;
 
     public EventsBean() {
         service = new MicunaTruckService();
@@ -70,7 +91,7 @@ public class EventsBean implements Serializable{
     public String getImage() {
         return this.getEvent().getImage();
     }
-    //patron de diseño delegate
+
     public void setImage(String image){
         this.getEvent().setName(image);
     }
@@ -91,7 +112,19 @@ public class EventsBean implements Serializable{
     }
 
     public String createEvent(){
-        service.createEvent(this.getUser(), this.getEventStatus(), this.getName(), this.getDescription(), this.getImage());
+        //this.getName();
+
+//        try (InputStream input = uploadedImage.getInputStream()) {
+//            String fileName = uploadedImage.getSubmittedFileName();
+//            File image = new File(this.getPathBaseImage(), fileName);
+//            Files.copy(input, image.toPath());
+//            this.setImage(image.toString());
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        service.createEvent(this.getUser(), this.getEventStatus(), this.getName(), this.getDescription(), this.getImage(), this.getEvent().getDate());
         return "success";
     }
 
@@ -100,4 +133,35 @@ public class EventsBean implements Serializable{
         return "success";
     }
 
+    public String getDate() {
+        Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String date = "";
+        try{
+            date = formatter.format(this.getEvent().getDate());
+        }catch (Exception e) {
+            date = "";
+        }
+        return date;
+    }
+
+    public void setDate(String date){
+        this.getEvent().setDate(date);
+    }
+
+    public void validateImage(FacesContext ctx, UIComponent comp, Object value){
+
+    }
+
+//    public Part getUploadedImage() {
+//        return uploadedImage;
+//    }
+//
+//    public void setUploadedImage(Part uploadedImage) {
+//        this.uploadedImage = uploadedImage;
+//    }
+
+    public String getPathBaseImage(){
+        Path folder = Paths.get("/web/uploads");
+        return folder.toString();
+    }
 }
