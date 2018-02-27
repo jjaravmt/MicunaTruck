@@ -126,4 +126,10 @@ public class AuthBean implements Serializable {
         }
         return connection;
     }
+
+    public String logout() {
+        HttpSession session = SessionUtils.getSession();
+        session.invalidate();
+        return "login";
+    }
 }
