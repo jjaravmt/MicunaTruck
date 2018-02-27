@@ -4,7 +4,6 @@ import jdk.nashorn.internal.objects.annotations.Constructor;
 import pe.edu.utp.micunatruck.models.MicunaTruckService;
 import pe.edu.utp.micunatruck.models.User;
 import pe.edu.utp.micunatruck.models.UserType;
-import pe.edu.utp.micunatruck.utis.SessionUtils;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
