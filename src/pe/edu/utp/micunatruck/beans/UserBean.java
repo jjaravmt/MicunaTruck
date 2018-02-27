@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -183,6 +184,8 @@ public class UserBean implements Serializable {
                 this.getLegalName(),
                 this.getDescription(), this.getPhoto(), this.getAddress(), this.getTelephone(),
                 this.getEmail(), this.getPassword(), this.getFlagActive());
+        HttpSession session = SessionUtils.getSession();
+        session.setAttribute("username", user.getName());
         return "success";
     }
 
