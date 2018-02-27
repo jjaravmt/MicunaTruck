@@ -39,8 +39,8 @@ public class EventsEntity extends BaseEntity {
         return null;
     }
 
-    public List<Event> findAll(){
-        return findByCriteria(DEFAULT_SQL, new UsersEntity(), new EventStatusEntity());
+    public List<Event> findAll(EventStatusEntity eventStatusEntity){
+        return findByCriteria(DEFAULT_SQL, new UsersEntity(), eventStatusEntity);
     }
 
     public Event findById(int id){
