@@ -79,4 +79,15 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+
+
+    <!--logout-->
+    <navigation-rule>
+        <navigation-case>
+            <from-action>#{authBean.logout}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
