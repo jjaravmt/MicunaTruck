@@ -99,6 +99,7 @@ public class AuthBean implements Serializable {
             }
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("username", user.getName());
+            session.setAttribute("user", user);
             return "success";
         }
         catch(Exception e){
