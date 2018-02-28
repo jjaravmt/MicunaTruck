@@ -18,15 +18,15 @@ public class FinancesEntity extends BaseEntity {
                 ResultSet resultSet = getConnection().createStatement()
                         .executeQuery(sql);
                 while (resultSet.next()) {
-                    Finance region = new Finance()
-                            .setId(resultSet.getInt("id"))
-                            .setOriginId(resultSet.getInt("originId"))
-                            .setOriginTypeId(resultSet.getInt("originId"))
-                            .setAmount(resultSet.getDouble("amount"))
-                            .setStartDate(resultSet.getDate("start_date"))
-                            .setEndDate(resultSet.getDate("end_date"))
-                            .setFlagActive(resultSet.getBoolean("flag_active"));//comentario
-                    Finances.add(region);
+//                    Finance region = new Finance()
+//                            .setId(resultSet.getInt("id"))
+//                            .setOriginId(resultSet.getInt("originId"))
+//                            .setOriginTypeId(resultSet.getInt("originId"))
+//                            .setAmount(resultSet.getDouble("amount"))
+//                            .setStartDate(resultSet.getDate("start_date"))
+//                            .setEndDate(resultSet.getDate("end_date"))
+//                            .setFlagActive(resultSet.getBoolean("flag_active"));//comentario
+//                    Finances.add(region);
                 }
                 return Finances;
             } catch (SQLException e) {
