@@ -7,8 +7,8 @@ import java.util.List;
 
 public class ApplicantsEntity extends BaseEntity {
 
-    private static String DEFAULT_SQL = "SELECT * FROM micunatruck.postulants ";
-    private static String DEFAULT_SQL_UPDATE = "UPDATE micunatruck.postulants SET ";
+    private static String DEFAULT_SQL = "SELECT * FROM micunatruck.applicants ";
+    private static String DEFAULT_SQL_UPDATE = "UPDATE micunatruck.applicants SET ";
 
     private List<Applicant> findByCriteria(String sql, UsersEntity usersEntity, EventsEntity eventsEntity)
     {
@@ -26,6 +26,7 @@ public class ApplicantsEntity extends BaseEntity {
                             .setUser(usersEntity.findById(resultSet.getInt("user_id")))
                             .setEvent(eventsEntity.findById(resultSet.getInt("event_id")))
                             .setFlagActive(resultSet.getBoolean("flag_active"))
+                            .setDeleteAt(resultSet.getDate("deleted_at"))
                             ;
                     applicants.add(applicant);
                 }
@@ -53,9 +54,16 @@ public class ApplicantsEntity extends BaseEntity {
     }
 
     public List<Applicant> findByUser(User user, UsersEntity usersEntity, EventsEntity eventsEntity){
-        List<Applicant> applicants = findByCriteria(DEFAULT_SQL + " WHERE flag_active = 1 AND user_id = " + String.valueOf(user.getId()),
-                usersEntity,
-                eventsEntity);
+        String sql = DEFAULT_SQL + " WHERE user_id = " + String.valueOf(user.getId()) + " AND deleted_at IS NULL";
+        List<Applicant> applicants = findByCriteria(sql, usersEntity, eventsEntity);
+        return (applicants) != null ? applicants : null;
+    }
+
+    public List<Applicant> findByUserAndEvent(User user, Event event, UsersEntity usersEntity, EventsEntity eventsEntity){
+        String sql = DEFAULT_SQL + " WHERE user_id = " + String.valueOf(user.getId())
+                + " AND event_id = " + String.valueOf(event.getId())
+                + " AND deleted_at IS NULL";
+        List<Applicant> applicants = findByCriteria(sql, usersEntity, eventsEntity);
         return (applicants) != null ? applicants : null;
     }
 
@@ -90,6 +98,13 @@ public class ApplicantsEntity extends BaseEntity {
             }
         //}
         return null;
+    }
+
+    public boolean cancel(Event event, User user){
+        return updateByCriteria(DEFAULT_SQL_UPDATE
+                + " deleted_at = NOW() "
+                + "WHERE user_id = " +  String.valueOf(user.getId())
+                + " AND event_id = " + String.valueOf(event.getId()) ) > 0;
     }
 
     private int getMaxId(){
