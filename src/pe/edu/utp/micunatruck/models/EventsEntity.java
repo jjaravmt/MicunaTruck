@@ -49,6 +49,11 @@ public class EventsEntity extends BaseEntity {
         return findByCriteria(DEFAULT_SQL, new UsersEntity(), eventStatusEntity);
     }
 
+    public List<Event> findAllByUser(User user, EventStatusEntity eventStatusEntity){
+        String sql = DEFAULT_SQL + " WHERE user_id = " + String.valueOf(user.getId()) + " AND deleted_at IS NULL";
+        return findByCriteria(sql, new UsersEntity(), eventStatusEntity);
+    }
+
     public Event findById(int id){
         List<Event> events = findByCriteria(DEFAULT_SQL + " WHERE id = " +
                 String.valueOf(id), new UsersEntity(), new EventStatusEntity());

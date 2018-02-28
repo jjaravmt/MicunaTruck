@@ -48,6 +48,11 @@ public class EventsBean implements Serializable{
         return service.findAllEvents();
     }
 
+    public List<Event> getEventsByUser() {
+        this.setUser((User) SessionUtils.getUser());
+        return service.findAllEventsByUser(this.getUser());
+    }
+
     public Event getEvent() {
         return event;
     }

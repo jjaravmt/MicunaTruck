@@ -91,6 +91,10 @@ public class MicunaTruckService {
         return getEventsEntity() != null ? getEventsEntity().findAll(getEventStatusEntity()) : null;
     }
 
+    public List<Event> findAllEventsByUser(User user) {
+        return getEventsEntity() != null ? getEventsEntity().findAllByUser(user, getEventStatusEntity()) : null;
+    }
+
     public Event createEvent(User user, EventStatus eventStatus, String name, String description, String image, String date) {
         return getEventsEntity() != null ?
                 getEventsEntity().create(user, eventStatus, name, description, image, date) : null;
