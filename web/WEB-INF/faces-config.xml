@@ -69,6 +69,12 @@
             <to-view-id>/eventNew.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-action>#{eventsBean.deleteEvent(event)}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/eventIndex.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/eventNew.xhtml</from-view-id>
