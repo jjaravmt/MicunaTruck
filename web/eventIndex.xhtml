@@ -91,7 +91,7 @@
                                                     <h:commandLink title="Editar evento" type="button" class="btn btn-success" action="#{eventsBean.editEvent(event)}">
                                                         <i class="fa fa-edit"></i>
                                                     </h:commandLink>
-                                                    <h:commandLink title="Cancelar evento" type="button" class="btn btn-warning" action="#{eventsBean.cancelEvent(event)}">
+                                                    <h:commandLink rendered="#{event.eventStatus.id == 1}" title="Cancelar evento" type="button" class="btn btn-warning" action="#{eventsBean.cancelEvent(event)}">
                                                         <i class="fa fa-exclamation-circle"></i>
                                                     </h:commandLink>
                                                     <h:commandLink title="Eliminar evento" type="button" class="btn btn-danger" action="#{eventsBean.deleteEvent(event)}">
