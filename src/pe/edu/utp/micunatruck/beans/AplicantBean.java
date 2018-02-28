@@ -64,12 +64,13 @@ public class AplicantBean implements Serializable {
 
     public String newApplicant(Event event){
         this.setUser((User) SessionUtils.getUser());
-        this.setApplicant(micunaTruckService.createPostulant(getUser(), event, false));
+        this.setApplicant(micunaTruckService.createApplicant(getUser(), event, false));
         return "success";
     }
 
-    public void submit() {
+    public String cancelApplicant(Event event){
         this.setUser((User) SessionUtils.getUser());
-        /*this.setApplicant(micunaTruckService.createPostulant(getUser(), event, false));*/
+        boolean dd = micunaTruckService.cancelApplicant(getUser(), event);
+        return "success";
     }
 }
