@@ -2,7 +2,7 @@ package pe.edu.utp.micunatruck.models;
 
 import java.util.Date;
 
-public class Postulant {
+public class Applicant {
 
     private int id;
     private User user;
@@ -12,22 +12,22 @@ public class Postulant {
     private Date deleteAt;
     private Date createdAt;
 
-    public Postulant() {
+    public Applicant() {
 
     }
 
-    public Postulant(User user, Event event) {
+    public Applicant(User user, Event event) {
         this.user = user;
         this.event = event;
     }
 
-    public Postulant(int id, User user, Event event) {
+    public Applicant(int id, User user, Event event) {
         this.id = id;
         this.user = user;
         this.event = event;
     }
 
-    public Postulant(int id, User user, Event event, boolean flagActive, Date updatedAt, Date deleteAt, Date createdAt) {
+    public Applicant(int id, User user, Event event, boolean flagActive, Date updatedAt, Date deleteAt, Date createdAt) {
         this.id = id;
         this.user = user;
         this.event = event;
@@ -41,7 +41,7 @@ public class Postulant {
         return id;
     }
 
-    public Postulant setId(int id) {
+    public Applicant setId(int id) {
         this.id = id;
         return this;
     }
@@ -50,7 +50,7 @@ public class Postulant {
         return user;
     }
 
-    public Postulant setUser(User user) {
+    public Applicant setUser(User user) {
         this.user = user;
         return this;
     }
@@ -59,7 +59,7 @@ public class Postulant {
         return event;
     }
 
-    public Postulant setEvent(Event event) {
+    public Applicant setEvent(Event event) {
         this.event = event;
         return this;
     }
@@ -68,7 +68,7 @@ public class Postulant {
         return flagActive;
     }
 
-    public Postulant setFlagActive(boolean flagActive) {
+    public Applicant setFlagActive(boolean flagActive) {
         this.flagActive = flagActive;
         return this;
     }
@@ -77,7 +77,7 @@ public class Postulant {
         return updatedAt;
     }
 
-    public Postulant setUpdatedAt(Date updatedAt) {
+    public Applicant setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -86,7 +86,7 @@ public class Postulant {
         return deleteAt;
     }
 
-    public Postulant setDeleteAt(Date deleteAt) {
+    public Applicant setDeleteAt(Date deleteAt) {
         this.deleteAt = deleteAt;
         return this;
     }
@@ -95,7 +95,7 @@ public class Postulant {
         return createdAt;
     }
 
-    public Postulant setCreatedAt(Date createdAt) {
+    public Applicant setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
     }
