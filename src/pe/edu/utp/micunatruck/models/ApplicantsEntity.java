@@ -5,35 +5,35 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostulantsEntity extends BaseEntity {
+public class ApplicantsEntity extends BaseEntity {
 
     private static String DEFAULT_SQL = "SELECT * FROM micunatruck.postulants ";
     private static String DEFAULT_SQL_UPDATE = "UPDATE micunatruck.postulants SET ";
 
-    private List<Postulant> findByCriteria(String sql, UsersEntity usersEntity, EventsEntity eventsEntity)
+    private List<Applicant> findByCriteria(String sql, UsersEntity usersEntity, EventsEntity eventsEntity)
     {
-        List<Postulant> postulants = null;
+        List<Applicant> applicants = null;
         boolean indHasData = false;
         if(getConnection() != null){
-            postulants = new ArrayList<>();
+            applicants = new ArrayList<>();
             try {
                 ResultSet resultSet = getConnection().createStatement().executeQuery(sql);
 
                 while (resultSet.next()){
                     indHasData = true;
-                    Postulant postulant = new Postulant()
+                    Applicant applicant = new Applicant()
                             .setId(resultSet.getInt("id"))
                             .setUser(usersEntity.findById(resultSet.getInt("user_id")))
                             .setEvent(eventsEntity.findById(resultSet.getInt("event_id")))
                             .setFlagActive(resultSet.getBoolean("flag_active"))
                             ;
-                    postulants.add(postulant);
+                    applicants.add(applicant);
                 }
 
                 if(!indHasData)
-                    postulants = null;
+                    applicants = null;
 
-                return postulants;
+                return applicants;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -41,22 +41,22 @@ public class PostulantsEntity extends BaseEntity {
         return null;
     }
 
-    public List<Postulant> findAll(UsersEntity usersEntity, EventsEntity eventsEntity){
+    public List<Applicant> findAll(UsersEntity usersEntity, EventsEntity eventsEntity){
         return findByCriteria(DEFAULT_SQL + "WHERE flag_active = 1", usersEntity, eventsEntity);
     }
 
-    public Postulant findById(int id, UsersEntity usersEntity, EventsEntity eventsEntity){
-        List<Postulant> postulants = findByCriteria(DEFAULT_SQL + " WHERE flag_active = 1 AND id = " + String.valueOf(id),
+    public Applicant findById(int id, UsersEntity usersEntity, EventsEntity eventsEntity){
+        List<Applicant> applicants = findByCriteria(DEFAULT_SQL + " WHERE flag_active = 1 AND id = " + String.valueOf(id),
                 usersEntity,
                 eventsEntity);
-        return (postulants) != null ? postulants.get(0) : null;
+        return (applicants) != null ? applicants.get(0) : null;
     }
 
-    public List<Postulant> findByUser(User user, UsersEntity usersEntity, EventsEntity eventsEntity){
-        List<Postulant> postulants = findByCriteria(DEFAULT_SQL + " WHERE flag_active = 1 AND user_id = " + String.valueOf(user.getId()),
+    public List<Applicant> findByUser(User user, UsersEntity usersEntity, EventsEntity eventsEntity){
+        List<Applicant> applicants = findByCriteria(DEFAULT_SQL + " WHERE flag_active = 1 AND user_id = " + String.valueOf(user.getId()),
                 usersEntity,
                 eventsEntity);
-        return (postulants) != null ? postulants : null;
+        return (applicants) != null ? applicants : null;
     }
 
     private int updateByCriteria(String sql){
@@ -70,22 +70,22 @@ public class PostulantsEntity extends BaseEntity {
         return 0;
     }
 
-    public Postulant create(User user, Event event, boolean flagActive){
+    public Applicant create(User user, Event event, boolean flagActive){
         //if(findByName(name) == null){
             if(getConnection() != null){
                 String sql =
-                        "INSERT INTO micunatruck.postulants(" +
+                        "INSERT INTO micunatruck.applicants(" +
                                 "user_id, event_id, flag_active, created_at) " +
                                 "VALUES("
-                                + "," + String.valueOf(user.getId())
+                                + String.valueOf(user.getId())
                                 + "," + String.valueOf(event.getId())
                                 + "," +  String.valueOf(flagActive ? 1 : 0)
                                 + ", NOW()"
                                 + ")";
                 int results = updateByCriteria(sql);
                 if(results > 0){
-                    Postulant postulant = new Postulant(getMaxId(), user, event);
-                    return postulant;
+                    Applicant applicant = new Applicant(getMaxId(), user, event);
+                    return applicant;
                 }
             }
         //}
@@ -93,7 +93,7 @@ public class PostulantsEntity extends BaseEntity {
     }
 
     private int getMaxId(){
-        String sql = "SELECT MAX(id) AS max_id FROM micunatruck.postulants";
+        String sql = "SELECT MAX(id) AS max_id FROM micunatruck.applicants";
         if(getConnection() != null){
             try {
                 ResultSet resultSet = getConnection().createStatement().executeQuery(sql);
