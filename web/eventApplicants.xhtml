@@ -70,22 +70,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <!--<ui:repeat value="#{aplicantBean.getAllApplicantsByEvent}" var="applicant">-->
-                                    <!--<tr>-->
-                                        <!--<td>#{applicant.id}</td>-->
-                                        <!--<td>#{applicant.user.name}</td>-->
-                                        <!--<td>#{applicant.user.photo}</td>-->
-                                        <!--<td>-->
-                                            <!--<div class="btn-group text-center">-->
-                                                <!--<h:form>-->
-                                                    <!--<h:commandLink title="Ver perfil" type="button" class="btn info">-->
-                                                        <!--<i class="fa fa-user"></i>-->
-                                                    <!--</h:commandLink>-->
-                                                <!--</h:form>-->
-                                            <!--</div>-->
-                                        <!--</td>-->
-                                    <!--</tr>-->
-                                <!--</ui:repeat>-->
+                                <ui:repeat value="#{aplicantBean.allApplicantsByEvent}" var="applicant">
+                                    <tr>
+                                        <td>#{applicant.id}</td>
+                                        <td>#{applicant.user.name}</td>
+                                        <td>#{applicant.user.photo}</td>
+                                        <td>
+                                            <div class="btn-group text-center">
+                                                <h:form>
+                                                    <h:commandLink title="Ver perfil" type="button" class="btn info">
+                                                        <i class="fa fa-user"></i>
+                                                    </h:commandLink>
+                                                </h:form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ui:repeat>
                             </tbody>
                             <tfoot>
                                 <tr>
