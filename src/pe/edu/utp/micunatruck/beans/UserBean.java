@@ -104,7 +104,7 @@ public class UserBean implements Serializable {
     }
 
     public String getLegalName(){
-        return this.getUser().getLastName();
+        return this.getUser().getLegalName();
     }
 
     public void setLegalName(String legalName){
@@ -195,7 +195,7 @@ public class UserBean implements Serializable {
     }
 
     public String updateUser() {
-        micunaTruckService.updateUser(this.getUser(), this.getUserType());
+        micunaTruckService.updateUser(this.getUser(), this.getUser().getUserType());
         return "success";
     }
 
