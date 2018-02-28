@@ -125,4 +125,9 @@ public class EventsEntity extends BaseEntity {
                 "date = '"+(new Timestamp(event.getDate().getTime())).toString()+ "', " +
                 "description ='"+String.valueOf(event.getDescription())+"', image='"+String.valueOf(event.getImage())+"' WHERE id = " + String.valueOf(event.getId())) > 0;
     }
+
+    public boolean cancel(Event event, User user, EventStatus eventStatus){
+        return updateByCriteria("UPDATE events SET " +
+                "event_status_id = "+3+" WHERE id = " + String.valueOf(event.getId())) > 0;
+    }
 }

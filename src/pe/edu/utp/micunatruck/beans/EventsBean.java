@@ -120,6 +120,11 @@ public class EventsBean implements Serializable{
         return "success";
     }
 
+    public String cancelEvent(Event event){
+        service.cancelEvent(event, this.getUser(), this.getEventStatus());
+        return "success";
+    }
+
     public String createEvent(){
         //this.getName();
 

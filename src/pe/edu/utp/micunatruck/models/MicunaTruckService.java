@@ -110,6 +110,11 @@ public class MicunaTruckService {
                 getEventsEntity().update(event, user, eventStatus) : false;
     }
 
+    public boolean cancelEvent(Event event, User user, EventStatus eventStatus) {
+        return getEventsEntity() != null ?
+                getEventsEntity().cancel(event, user, eventStatus) : false;
+    }
+
     /* USER TYPE */
     public UserTypeEntity getUsersTypeEntity() {
         if(getConnection() != null){
