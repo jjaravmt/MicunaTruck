@@ -15,20 +15,6 @@
         <ui:define name="foot">
             <!-- Bootstrap WYSIHTML5 -->
             <script src="assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-
-            <script>
-                $(function () {
-                    // CKEDITOR.replace('editor1');
-                    //bootstrap WYSIHTML5 - text editor
-                    //$('.description').wysihtml5();
-                });
-
-                //Date picker
-                $('.date-event').datepicker({
-                    autoclose: true,
-                    format: "dd/mm/yyyy"
-                });
-            </script>
         </ui:define>
         <ui:define name="content">
 
@@ -36,12 +22,11 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Eventos
+                    Perfil
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                    <li class="">Eventos</li>
-                    <li class="active">Editar</li>
+                    <li class="active">Perfil</li>
                 </ol>
             </section>
 
@@ -53,7 +38,7 @@
                         <!-- general form elements -->
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Editar evento</h3>
+                                <h3 class="box-title">Perfil</h3>
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->
@@ -61,32 +46,43 @@
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label for="name">Nombre</label>
-                                        <h:inputText class="form-control" placeholder="Ingrese nombre de evento" id="name" value="#{eventsBean.name}"/>
+                                        <h:inputText class="form-control" placeholder="Ingrese nombre " id="name" value="#{userBean.name}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastname">Apellidos</label>
+                                        <h:inputText class="form-control" placeholder="Ingrese apellidos" id="lastname" value="#{userBean.lastName}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="legal_name">Razón social</label>
+                                        <h:inputText class="form-control" placeholder="Ingrese razón social" id="legal_name" value="#{userBean.legalName}"/>
                                     </div>
                                     <div class="form-group">
                                         <div class="box-header">
                                             <label for="description">Descripción</label>
                                         </div>
                                         <div class="box-body pad">
-                                            <h:inputTextarea class="textarea" id="description" placeholder="Ingrese la descripción del evento" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" value="#{eventsBean.description}" />
+                                            <h:inputTextarea class="textarea" id="description" placeholder="Ingrese la descripción del usuario" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" value="#{userBean.description}" />
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Dirección</label>
+                                        <h:inputText class="form-control" placeholder="Ingrese dirección" id="address" value="#{userBean.address}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telephone">Teléfono</label>
+                                        <h:inputText class="form-control" placeholder="Ingrese teléfono" id="telephone" value="#{userBean.telephone}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Correo</label>
+                                        <h:outputText class="form-control" id="email" value="#{userBean.email}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Contraseña (<span style="color: red;">*vacio para no cambiar</span>)</label>
+                                        <h:inputSecret class="form-control" id="password" value="#{userBean.password}"/>
                                     </div>
 
                                     <div class="form-group">
-                                        <div class="form-group">
-                                            <label for="date">Fecha de evento:</label>
-
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <h:inputText class="form-control pull-right date-event" id="date" value="#{eventsBean.date}" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="image">Imagen para el evento</label>
+                                        <label for="image">Foto</label>
                                         <input type="file" id="image" name="image"/>
 
                                     </div>
@@ -95,7 +91,7 @@
                                 <!-- /.box-body -->
 
                                 <div class="box-footer">
-                                    <h:commandButton class="btn btn-primary" value="Guardar" action="#{eventsBean.updateEvent}"/>
+                                    <h:commandButton class="btn btn-primary" value="Guardar" action="#{userBean.updateUser}"/>
                                 </div>
                             </h:form>
                         </div>

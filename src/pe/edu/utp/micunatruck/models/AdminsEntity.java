@@ -29,7 +29,7 @@ public class AdminsEntity extends BaseEntity {
                     Admin region = new Admin()
                             .setId(resultSet.getInt("id"))
                             .setName(resultSet.getString("name"))
-                            .setLastName(resultSet.getString("last_name"))
+                            .setLastName(resultSet.getString("lastname"))
                             .setPhoto(resultSet.getString("photo"))
                             .setEmail(resultSet.getString("email"))
                             .setPassword(resultSet.getString("password"))

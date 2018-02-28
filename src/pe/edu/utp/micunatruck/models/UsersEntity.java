@@ -131,6 +131,11 @@ public class UsersEntity extends BaseEntity {
     }*/
 
     public boolean update(User user, UserType userType){
+        String pass = "";
+        if(!user.getPassword().isEmpty() && user.getPassword() != ""){
+            pass = "password = '" + user.getPassword() + "', " ;
+        }
+
         String sql = DEFAULT_SQL_UPDATE +
                 "user_type_id = " + userType.getId() + ", " +
                 "name = '" + user.getName() + "', " +
@@ -141,7 +146,7 @@ public class UsersEntity extends BaseEntity {
                 "address = '" + user.getAddress() + "', " +
                 "telephone = '" + user.getTelephone() + "', " +
                 "email = '" + user.getEmail() + "', " +
-                "password = '" + user.getPassword() + "', " +
+                pass +
                 "flag_active = " + String.valueOf(user.getFlagActive() ? 1 : 0)  + ", " +
                 "updated_at = NOW() " +
                 "WHERE id = " + String.valueOf(user.getId());
