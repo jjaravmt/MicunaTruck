@@ -179,4 +179,14 @@ public class EventsBean implements Serializable{
         Path folder = Paths.get("/web/uploads");
         return folder.toString();
     }
+
+    public List<Event> getEventsPendings() {
+        this.setUser((User) SessionUtils.getUser());
+        return service.findAllEventsPendings(getUser());
+    }
+
+    public List<Event> getMyEvents() {
+        this.setUser((User) SessionUtils.getUser());
+        return service.findAllByUserApplicants(getUser());
+    }
 }
