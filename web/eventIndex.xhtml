@@ -85,7 +85,7 @@
                                         <td>
                                             <div class="btn-group text-center">
                                                 <h:form>
-                                                    <h:commandLink title="Ver postulantes" type="button" class="btn info">
+                                                    <h:commandLink title="Ver postulantes" type="button" class="btn info" action="#{aplicantBean.applicantsByEvent(event)}">
                                                         <i class="fa fa-users"></i>
                                                     </h:commandLink>
                                                     <h:commandLink title="Editar evento" type="button" class="btn btn-success" action="#{eventsBean.editEvent(event)}">
