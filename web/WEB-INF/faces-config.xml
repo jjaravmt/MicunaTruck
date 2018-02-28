@@ -122,6 +122,42 @@
         </navigation-case>
     </navigation-rule>
 
+    <navigation-rule>
+        <from-view-id>/eventIndex.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{userBean.editUser(userBean.authBean.user)}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/eventProfile.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/eventNew.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{userBean.editUser(userBean.authBean.user)}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/eventProfile.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/eventEdit.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{userBean.editUser(userBean.user)}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/eventProfile.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/eventProfile.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{userBean.updateUser}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/eventIndex.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 
     <!--logout-->
     <navigation-rule>
