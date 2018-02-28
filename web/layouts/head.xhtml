@@ -52,7 +52,9 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <h:form>
+                                    <h:commandLink class="btn btn-default btn-flat profile-general" action="#{userBean.editUser(userBean.authBean.user)}" value="Profile" />
+                                </h:form>
                             </div>
                             <div class="pull-right">
                                 <h:form>
