@@ -112,8 +112,9 @@ public class UsersEntity extends BaseEntity {
                                 + ")";
                 int results = updateByCriteria(sql);
                 if(results > 0){
-                    User region = new User();
-                    return region;
+                    User user = new User(getMaxId(), userType, name, lastName, legalName, description, photo, address,
+                            telephone, email, password, flagActive);
+                    return user;
                 }
             }
         }
@@ -145,5 +146,18 @@ public class UsersEntity extends BaseEntity {
                 "updated_at = NOW() " +
                 "WHERE id = " + String.valueOf(user.getId());
         return updateByCriteria(sql) > 0;
+    }
+
+    private int getMaxId(){
+        String sql = "SELECT MAX(id) AS max_id FROM micunatruck.users";
+        if(getConnection() != null){
+            try {
+                ResultSet resultSet = getConnection().createStatement().executeQuery(sql);
+                return resultSet.next() ? resultSet.getInt("max_id") : 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
     }
 }
