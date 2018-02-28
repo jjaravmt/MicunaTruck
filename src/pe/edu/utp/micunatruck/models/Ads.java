@@ -1,7 +1,8 @@
 package pe.edu.utp.micunatruck.models;
 import java.util.Date;
 
-    public class  Ads {
+
+    public class Ads {
         private int id;
         private Admin admin;
         private String name;

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:outputLabel value="Gestor Contenido publicitario"/>
+    <h:dataTable value="#{adsBean.adsRs}" var="ads">
+        <h:column>
+            <f:facet name="header">Id</f:facet>
+            #{ads.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">AdminId</f:facet>
+            #{ads.admin.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            #{ads.name}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Description</f:facet>
+            #{ads.description}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Image</f:facet>
+            #{ads.image}
+        </h:column>
+        <h:column>
+            <f:facet name="header">price</f:facet>
+            #{ads.price}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Start Date</f:facet>
+            #{ads.start_date}
+        </h:column>
+        <h:column>
+            <f:facet name="header">End Date</f:facet>
+            #{ads.end_date}
+        </h:column>
+        <h:column>
+            <f:facet name="header">FlagActive</f:facet>
+            #{ads.flagActive}
+        </h:column>
+        <h:column>
+            <f:facet name="header">UpdatedAt</f:facet>
+            #{ads.updatedAt}
+        </h:column>
+        <h:column>
+            <f:facet name="header">CreatedAt</f:facet>
+            #{ads.createdAt}
+        </h:column>
+        <h:column>
+            <f:facet name="header">CodeSpace</f:facet>
+            #{ads.codeSpace}
+        </h:column>
+
+    </h:dataTable>
+</f:view>
+</html>

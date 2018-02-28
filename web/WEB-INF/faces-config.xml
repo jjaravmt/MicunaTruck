@@ -3,6 +3,7 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
     <navigation-rule>
         <from-view-id>/home.xhtml</from-view-id>
         <navigation-case>
@@ -160,12 +161,24 @@
     </navigation-rule>
 
     <!--logout-->
-    <navigation-rule>
+    <!--<navigation-rule>
         <navigation-case>
             <from-action>#{authBean.logout}</from-action>
             <from-outcome>success</from-outcome>
             <to-view-id>/home.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+    </navigation-rule>-->
+
+
+    <!--Publicidad-->
+    <navigation-rule>
+        <from-view-id>/showAds.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{adsBean.newAds}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/newAds.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
+
 </faces-config>
