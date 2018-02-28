@@ -19,7 +19,7 @@
                     <small>List</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Index</a></li>
+                    <li><a href="#"><i class="fa fa-dashboard"/> Index</a></li>
                     <li class="active">Events</li>
                 </ol>
             </section>
@@ -41,37 +41,37 @@
                                 <th>Date</th>
                                 <th>Cover Page</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <ui:repeat value="#{eventsBean.events}" var="event">
+                            <ui:repeat value="#{eventsBean.eventsPendings}" var="event">
                                 <tr>
                                     <td>#{event.id}</td>
                                     <td>#{event.name}</td>
-                                    <td>#{event.date.toString}</td>
+                                    <td>#{event.dateParse}</td>
                                     <td>#{event.image}</td>
                                     <td>#{event.eventStatus.name}</td>
                                     <td>
-                                        <div class="row">
-                                            <div class="checkbox icheck">
+                                        <div class="row text-center">
+                                            <!--<div class="checkbox icheck">
                                                 <label>
-                                                    <input type="checkbox"/>
+                                                    <input type="checkbox" id="chkSelect"/>
                                                 </label>
-                                            </div>
+                                            </div>-->
+                                            <h:form>
+                                                <h:commandLink rendered="#{event.isSendRequest}" title="Cancel request" type="button"
+                                                               class="btn btn-danger" action="#{aplicantBean.cancelApplicant(event)}">
+                                                    <i class="fa fa-close"/>
+                                                </h:commandLink>
+                                            </h:form>
+                                            <h:form>
+                                                <h:commandLink id="chkSelect" rendered="#{!event.isSendRequest}" title="Send Request"
+                                                               type="button"
+                                                   class="btn btn-success"
+                                                   action="#{aplicantBean.newApplicant(event)}" value="Sel"/>
+                                            </h:form>
                                         </div>
-
-                                        <!--<div class="btn-group text-center">
-                                            <button type="button" class="btn btn-success">
-                                                <i class="fa fa-square-o"/>
-                                            </button>
-                                            <button type="button" class="btn btn-success">
-                                                <i class="fa fa-check-square-o"/>
-                                            </button>
-                                            <button type="button" class="btn btn-danger">
-                                                <i class="fa fa-close"/>
-                                            </button>
-                                        </div>-->
                                     </td>
                                 </tr>
                             </ui:repeat>
