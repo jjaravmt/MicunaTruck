@@ -278,4 +278,10 @@ VALUES (
     NOW()
 	);
 
+INSERT INTO event_status (id,name,description, flag_active, updated_at) VALUES
+(1, 'Pendiente', 'Evento Pendiente', 1, NOW()),
+(2, 'Finalizado', 'Evento Finalizado', 1, NOW()),
+(3, 'Cancelado', 'Evento Cancelado', 1, NOW())
+;
+
 COMMIT;

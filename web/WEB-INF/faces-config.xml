@@ -24,7 +24,15 @@
         <navigation-case>
             <from-action>#{userBean.createUser}</from-action>
             <from-outcome>success</from-outcome>
+            <if>#{authBean.user.userType.id == 1}</if>
             <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{userBean.createUser}</from-action>
+            <from-outcome>success</from-outcome>
+            <if>#{authBean.user.userType.id == 2}</if>
+            <to-view-id>/eventIndex.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -45,7 +53,15 @@
         <navigation-case>
             <from-action>#{authBean.authentication}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
+            <if>#{authBean.user.userType.id == 1}</if>
+            <to-view-id>/user-index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{authBean.authentication}</from-action>
+            <from-outcome>success</from-outcome>
+            <if>#{authBean.user.userType.id == 2}</if>
+            <to-view-id>/eventIndex.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -77,6 +93,12 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
+            <from-action>#{eventsBean.cancelEvent(event)}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/eventIndex.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-action>#{eventsBean.editEvent(event)}</from-action>
             <from-outcome>success</from-outcome>
             <to-view-id>/eventEdit.xhtml</to-view-id>
@@ -101,6 +123,42 @@
         </navigation-case>
     </navigation-rule>
 
+    <navigation-rule>
+        <from-view-id>/eventIndex.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{userBean.editUser(userBean.authBean.user)}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/profile.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/eventNew.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{userBean.editUser(userBean.authBean.user)}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/profile.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/eventEdit.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{userBean.editUser(userBean.user)}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/profile.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/profile.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{userBean.updateUser}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/eventIndex.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 
     <!--logout-->
     <!--<navigation-rule>

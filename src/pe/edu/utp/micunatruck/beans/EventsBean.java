@@ -48,6 +48,11 @@ public class EventsBean implements Serializable{
         return service.findAllEvents();
     }
 
+    public List<Event> getEventsByUser() {
+        this.setUser((User) SessionUtils.getUser());
+        return service.findAllEventsByUser(this.getUser());
+    }
+
     public Event getEvent() {
         return event;
     }
@@ -115,6 +120,11 @@ public class EventsBean implements Serializable{
         return "success";
     }
 
+    public String cancelEvent(Event event){
+        service.cancelEvent(event, this.getUser(), this.getEventStatus());
+        return "success";
+    }
+
     public String createEvent(){
         //this.getName();
 
@@ -128,6 +138,7 @@ public class EventsBean implements Serializable{
 //            e.printStackTrace();
 //        }
 
+        this.setUser((User) SessionUtils.getUser());
         service.createEvent(this.getUser(), this.getEventStatus(), this.getName(), this.getDescription(), this.getImage(), this.getDate());
         return "success";
     }

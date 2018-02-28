@@ -75,7 +75,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <ui:repeat value="#{eventsBean.events}" var="event">
+                                <ui:repeat value="#{eventsBean.eventsByUser}" var="event">
                                     <tr>
                                         <td>#{event.id}</td>
                                         <td>#{event.name}</td>
@@ -85,13 +85,16 @@
                                         <td>
                                             <div class="btn-group text-center">
                                                 <h:form>
-                                                    <h:commandLink type="button" class="btn info">
+                                                    <h:commandLink title="Ver postulantes" type="button" class="btn info">
                                                         <i class="fa fa-users"></i>
                                                     </h:commandLink>
-                                                    <h:commandLink type="button" class="btn btn-success" action="#{eventsBean.editEvent(event)}">
+                                                    <h:commandLink title="Editar evento" type="button" class="btn btn-success" action="#{eventsBean.editEvent(event)}">
                                                         <i class="fa fa-edit"></i>
                                                     </h:commandLink>
-                                                    <h:commandLink type="button" class="btn btn-danger" action="#{eventsBean.deleteEvent(event)}">
+                                                    <h:commandLink rendered="#{event.eventStatus.id == 1}" title="Cancelar evento" type="button" class="btn btn-warning" action="#{eventsBean.cancelEvent(event)}">
+                                                        <i class="fa fa-exclamation-circle"></i>
+                                                    </h:commandLink>
+                                                    <h:commandLink title="Eliminar evento" type="button" class="btn btn-danger" action="#{eventsBean.deleteEvent(event)}">
                                                         <i class="fa fa-close"></i>
                                                     </h:commandLink>
                                                 </h:form>

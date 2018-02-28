@@ -49,6 +49,11 @@ public class EventsEntity extends BaseEntity {
         return findByCriteria(DEFAULT_SQL, new UsersEntity(), eventStatusEntity);
     }
 
+    public List<Event> findAllByUser(User user, EventStatusEntity eventStatusEntity){
+        String sql = DEFAULT_SQL + " WHERE user_id = " + String.valueOf(user.getId()) + " AND deleted_at IS NULL";
+        return findByCriteria(sql, new UsersEntity(), eventStatusEntity);
+    }
+
     public Event findById(int id){
         List<Event> events = findByCriteria(DEFAULT_SQL + " WHERE id = " +
                 String.valueOf(id), new UsersEntity(), new EventStatusEntity());
@@ -94,7 +99,7 @@ public class EventsEntity extends BaseEntity {
                 e.printStackTrace();
             }
             String sql = "INSERT INTO events(user_id, event_status_id, name, description, image, date, flag_active, updated_at) " +
-                    "VALUES("+1+","+1+",'"+name+"','"+description+"','"+image+"','"+(new Timestamp(dateDb.getTime())).toString()+"',1,'"+(new Timestamp(createdAt.getTime())).toString()+"')";
+                    "VALUES("+user.getId()+","+1+",'"+name+"','"+description+"','"+image+"','"+(new Timestamp(dateDb.getTime())).toString()+"',1,'"+(new Timestamp(createdAt.getTime())).toString()+"')";
             int results = updateByCriteria(sql);
             if(results > 0){
                 Event event = new Event(getMaxId(), user, eventStatus, name, description, image, 1, date);
@@ -119,5 +124,10 @@ public class EventsEntity extends BaseEntity {
                 "name = '"+event.getName()+ "', " +
                 "date = '"+(new Timestamp(event.getDate().getTime())).toString()+ "', " +
                 "description ='"+String.valueOf(event.getDescription())+"', image='"+String.valueOf(event.getImage())+"' WHERE id = " + String.valueOf(event.getId())) > 0;
+    }
+
+    public boolean cancel(Event event, User user, EventStatus eventStatus){
+        return updateByCriteria("UPDATE events SET " +
+                "event_status_id = "+3+" WHERE id = " + String.valueOf(event.getId())) > 0;
     }
 }

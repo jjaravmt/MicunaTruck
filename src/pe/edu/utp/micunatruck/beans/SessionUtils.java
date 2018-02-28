@@ -29,4 +29,12 @@ public class SessionUtils {
         else
             return null;
     }
+
+    public static Object getUser() {
+        HttpSession session = getSession();
+        if (session != null)
+            return session.getAttribute("user");
+        else
+            return null;
+    }
 }

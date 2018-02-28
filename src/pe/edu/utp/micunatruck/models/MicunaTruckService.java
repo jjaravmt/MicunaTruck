@@ -17,6 +17,7 @@ public class MicunaTruckService {
     private EventStatusEntity eventStatusEntity;
     private AdsEntity adsEntity;
     private AdminsEntity adminsEntity;
+//    private PostulantsEntity postulantsEntity;
 
 
     private Connection getConnection() {
@@ -91,6 +92,10 @@ public class MicunaTruckService {
         return getEventsEntity() != null ? getEventsEntity().findAll(getEventStatusEntity()) : null;
     }
 
+    public List<Event> findAllEventsByUser(User user) {
+        return getEventsEntity() != null ? getEventsEntity().findAllByUser(user, getEventStatusEntity()) : null;
+    }
+
     public Event createEvent(User user, EventStatus eventStatus, String name, String description, String image, String date) {
         return getEventsEntity() != null ?
                 getEventsEntity().create(user, eventStatus, name, description, image, date) : null;
@@ -104,6 +109,11 @@ public class MicunaTruckService {
     public boolean updateEvent(Event event, User user, EventStatus eventStatus) {
         return getEventsEntity() != null ?
                 getEventsEntity().update(event, user, eventStatus) : false;
+    }
+
+    public boolean cancelEvent(Event event, User user, EventStatus eventStatus) {
+        return getEventsEntity() != null ?
+                getEventsEntity().cancel(event, user, eventStatus) : false;
     }
 
     /* USER TYPE */
@@ -201,4 +211,27 @@ public class MicunaTruckService {
     public List<EventStatus> findAllEventStatus() {
         return getEventStatusEntity() != null ? getEventStatusEntity().findAll() : null;
     }
+
+    //POSTULANTS
+//    public PostulantsEntity getPostulantsEntity() {
+//        if(getConnection() != null){
+//            if(postulantsEntity == null){
+//                postulantsEntity = new PostulantsEntity();
+//                eventStatusEntity.setConnection(getConnection());
+//            }
+//        }
+//        return postulantsEntity;
+//    }
+//
+//    public Postulant createPostulant(User user, Event event, boolean flagActive){
+//        return getUsersEntity() != null ? getPostulantsEntity().create(user, event, flagActive) : null;
+//    }
+//
+//    public List<Postulant> findAllPostulants() {
+//        return getUsersEntity() != null ? getPostulantsEntity().findAll(getUsersEntity(), getEventsEntity()) : null;
+//    }
+//
+//    public List<Postulant> findAllPostulantsByUser(User user) {
+//        return getUsersEntity() != null ? getPostulantsEntity().findByUser(user, getUsersEntity(), getEventsEntity()) : null;
+//    }
 }

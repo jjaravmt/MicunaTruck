@@ -9,13 +9,9 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
 @Named
@@ -28,19 +24,16 @@ public class UserBean implements Serializable {
     private User user;
     private List<UserType> userTypes;
     private UserType userType;
-    private Connection connection;
 
     @Constructor
     protected void userInit(){
         this.setUserType(new UserType());
         micunaTruckService = new MicunaTruckService();
-        micunaTruckService.setConnection(getConnection());
     }
 
     @PostConstruct
     protected void init() {
         micunaTruckService = new MicunaTruckService();
-        micunaTruckService.setConnection(getConnection());
     }
 
     public AuthBean getAuthBean() {
@@ -104,7 +97,7 @@ public class UserBean implements Serializable {
     }
 
     public String getLegalName(){
-        return this.getUser().getLastName();
+        return this.getUser().getLegalName();
     }
 
     public void setLegalName(String legalName){
@@ -185,9 +178,9 @@ public class UserBean implements Serializable {
                 this.getDescription(), this.getPhoto(), this.getAddress(), this.getTelephone(),
                 this.getEmail(), this.getPassword(), this.getFlagActive());
 
-        AuthBean authBean = new AuthBean();
-        authBean.setUser(user);
-        this.setAuthBean(authBean);
+//        AuthBean authBean = new AuthBean();
+        this.getAuthBean().setUser(user);
+//        this.setAuthBean(authBean);
         HttpSession session = SessionUtils.getSession();
         session.setAttribute("username", user.getName());
         session.setAttribute("user", user);
@@ -195,31 +188,12 @@ public class UserBean implements Serializable {
     }
 
     public String updateUser() {
-        micunaTruckService.updateUser(this.getUser(), this.getUserType());
+        micunaTruckService.updateUser(this.getUser(), this.getUser().getUserType());
         return "success";
     }
 
     public String deleteUser(User user) {
         micunaTruckService.deleteUser(user.getId());
         return "success";
-    }
-
-    private Connection getConnection() {
-        try{
-            if(connection == null) {
-                try {
-                    InitialContext ctx = new InitialContext();
-                    DataSource dataSource = (DataSource)ctx.lookup("jdbc/MySQLDataSourceMicunaTruck");
-                    connection = dataSource.getConnection();
-
-                } catch (NamingException | SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return connection;
     }
 }
