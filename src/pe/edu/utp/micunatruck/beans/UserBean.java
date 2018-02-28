@@ -180,12 +180,17 @@ public class UserBean implements Serializable {
     }
 
     public String createUser() {
-        micunaTruckService.createUser(this.getUserType(), this.getName(), this.getLastName(),
+        User user = micunaTruckService.createUser(this.getUserType(), this.getName(), this.getLastName(),
                 this.getLegalName(),
                 this.getDescription(), this.getPhoto(), this.getAddress(), this.getTelephone(),
                 this.getEmail(), this.getPassword(), this.getFlagActive());
+
+        AuthBean authBean = new AuthBean();
+        authBean.setUser(user);
+        this.setAuthBean(authBean);
         HttpSession session = SessionUtils.getSession();
         session.setAttribute("username", user.getName());
+        session.setAttribute("user", user);
         return "success";
     }
 
