@@ -113,8 +113,10 @@ public class EventsEntity extends BaseEntity {
     }
 
     public boolean update(Event event, User user, EventStatus eventStatus){
-        return updateByCriteria("UPDATE event SET user_id='"+String.valueOf(user.getId())+
-                "', event_status_id ='"+String.valueOf(eventStatus.getId())+"', name = '"+event.getName()+
+        return updateByCriteria("UPDATE events SET " +
+//                "user_id='"+String.valueOf(user.getId())+
+//                "', event_status_id ='"+String.valueOf(eventStatus.getId())+"', " +
+                "name = '"+event.getName()+
                 "', description ='"+String.valueOf(event.getDescription())+"', image='"+String.valueOf(event.getImage())+"' WHERE id = " + String.valueOf(event.getId())) > 0;
     }
 }
