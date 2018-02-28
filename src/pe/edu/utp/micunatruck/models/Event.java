@@ -20,6 +20,7 @@ public class Event {
     private Date deleteAt;
     private Date updatedAt;
     private Date createdAt;
+    private boolean isSendRequest = false;
 
     public Event(){
 
@@ -162,5 +163,13 @@ public class Event {
             date = "-";
         }
         return date;
+    }
+
+    public boolean getIsSendRequest() {
+        return isSendRequest;
+    }
+
+    public void setIsSendRequest(boolean sendRequest) {
+        this.isSendRequest = sendRequest;
     }
 }

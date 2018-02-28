@@ -196,4 +196,12 @@ public class UserBean implements Serializable {
         micunaTruckService.deleteUser(user.getId());
         return "success";
     }
+
+    /*public String indexUser() {
+        return "success";
+    }
+
+    public String myPostulants() {
+        return "success";
+    }*/
 }

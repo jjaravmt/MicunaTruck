@@ -96,6 +96,22 @@ public class MicunaTruckService {
         return getEventsEntity() != null ? getEventsEntity().findAllByUser(user, getEventStatusEntity()) : null;
     }
 
+    public List<Event> findAllEventsPendings(User user) {
+        return getEventsEntity() != null ? getEventsEntity().findAllPendings(user,
+                getEventStatusEntity(),
+                getApplicantsEntity(),
+                getUsersEntity(),
+                getEventsEntity()) : null;
+    }
+
+    public List<Event> findAllByUserApplicants(User user){
+        return getEventsEntity() != null ? getEventsEntity().findAllByUserApplicants(user,
+                                                                        getApplicantsEntity(),
+                                                                        getUsersEntity(),
+                                                                        getEventsEntity(),
+                                                                        getEventStatusEntity()) : null;
+    }
+
     public Event createEvent(User user, EventStatus eventStatus, String name, String description, String image, String date) {
         return getEventsEntity() != null ?
                 getEventsEntity().create(user, eventStatus, name, description, image, date) : null;
@@ -236,7 +252,6 @@ public class MicunaTruckService {
 //    }
 
 
-
     public ApplicantsEntity getApplicantsEntity() {
         if(getConnection() != null){
             if(applicantsEntity == null){
@@ -249,5 +264,22 @@ public class MicunaTruckService {
 
     public List<Applicant> findAllApplicantsByEvent(Event event) {
         return getApplicantsEntity() != null ? getApplicantsEntity().findAllByEvent(event, getUsersEntity(), getEventsEntity()) : null;
+    }
+
+    public Applicant createApplicant(User user, Event event, boolean flagActive){
+        return getApplicantsEntity() != null ? getApplicantsEntity().create(user, event, flagActive) : null;
+    }
+
+    public boolean cancelApplicant(User user, Event event){
+        return getApplicantsEntity() != null ? getApplicantsEntity().cancel(event, user) : null;
+    }
+
+
+    public List<Applicant> findAllPostulants() {
+        return getUsersEntity() != null ? getApplicantsEntity().findAll(getUsersEntity(), getEventsEntity()) : null;
+    }
+
+    public List<Applicant> findAllPostulantsByUser(User user) {
+        return getUsersEntity() != null ? getApplicantsEntity().findByUser(user, getUsersEntity(), getEventsEntity()) : null;
     }
 }

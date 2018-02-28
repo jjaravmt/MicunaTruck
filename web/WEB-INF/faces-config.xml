@@ -75,7 +75,27 @@
             <to-view-id>/user/user-register.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-
+    <navigation-rule>
+        <from-view-id>/user-index.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{aplicantBean.newApplicant(event)}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/user-index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!--<navigation-case>
+            <from-action>#{userBean.indexUser}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/user-index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{userBean.myPostulants}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/user-index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>-->
+    </navigation-rule>
 
     <!--event-->
     <navigation-rule>
