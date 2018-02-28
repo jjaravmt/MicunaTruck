@@ -159,6 +159,16 @@
         </navigation-case>
     </navigation-rule>
 
+    <navigation-rule>
+        <from-view-id>/eventIndex.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{aplicantBean.applicantsByEvent(event)}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/eventApplicants.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
     <!--logout-->
     <navigation-rule>
         <navigation-case>
