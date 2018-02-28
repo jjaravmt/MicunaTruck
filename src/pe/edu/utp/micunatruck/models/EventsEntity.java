@@ -65,6 +65,44 @@ public class EventsEntity extends BaseEntity {
         return (events != null && !events.isEmpty()) ? events.get(0) : null;
     }
 
+    public List<Event> findAllPendings(User user, EventStatusEntity eventStatusEntity,
+                                       ApplicantsEntity applicantsEntity,
+                                       UsersEntity usersEntity,
+                                       EventsEntity eventsEntity){
+        String sql = DEFAULT_SQL + " WHERE flag_active = 1 AND event_status_id = 1 AND deleted_at IS NULL";
+
+        List<Event> events = findByCriteria(sql, usersEntity, eventStatusEntity);
+
+        for (Event event : events) {
+            List<Applicant> applicants = applicantsEntity.findByUserAndEvent(user, event, usersEntity, eventsEntity);
+            if (applicants != null)
+                event.setIsSendRequest(true);
+        }
+
+        return events;
+    }
+
+    public List<Event> findAllByUserApplicants(User user, ApplicantsEntity applicantsEntity,
+                                               UsersEntity usersEntity, EventsEntity eventsEntity, EventStatusEntity eventStatusEntity){
+        List<Applicant> applicants = applicantsEntity.findByUser(user, usersEntity, eventsEntity);
+        List<Event> filter = null;
+        if(applicants != null) {
+            List<Event> all = findAll(eventStatusEntity);
+            filter = new ArrayList<>();
+            for (Event event : all) {
+                boolean add = false;
+                for (Applicant applicant : applicants) {
+                    if (event.getId() == applicant.getEvent().getId())
+                        add = true;
+                }
+
+                if (add)
+                    filter.add(event);
+            }
+        }
+        return  filter;
+    }
+
     private int getMaxId(){
         String sql = "SELECT MAX(id) AS max_id FROM events";
         if(getConnection() != null){
