@@ -17,7 +17,7 @@ public class MicunaTruckService {
     private EventStatusEntity eventStatusEntity;
     private AdsEntity adsEntity;
     private AdminsEntity adminsEntity;
-    private PostulantsEntity postulantsEntity;
+//    private PostulantsEntity postulantsEntity;
 
 
     private Connection getConnection() {
@@ -213,25 +213,25 @@ public class MicunaTruckService {
     }
 
     //POSTULANTS
-    public PostulantsEntity getPostulantsEntity() {
-        if(getConnection() != null){
-            if(postulantsEntity == null){
-                postulantsEntity = new PostulantsEntity();
-                eventStatusEntity.setConnection(getConnection());
-            }
-        }
-        return postulantsEntity;
-    }
-
-    public Postulant createPostulant(User user, Event event, boolean flagActive){
-        return getUsersEntity() != null ? getPostulantsEntity().create(user, event, flagActive) : null;
-    }
-
-    public List<Postulant> findAllPostulants() {
-        return getUsersEntity() != null ? getPostulantsEntity().findAll(getUsersEntity(), getEventsEntity()) : null;
-    }
-
-    public List<Postulant> findAllPostulantsByUser(User user) {
-        return getUsersEntity() != null ? getPostulantsEntity().findByUser(user, getUsersEntity(), getEventsEntity()) : null;
-    }
+//    public PostulantsEntity getPostulantsEntity() {
+//        if(getConnection() != null){
+//            if(postulantsEntity == null){
+//                postulantsEntity = new PostulantsEntity();
+//                eventStatusEntity.setConnection(getConnection());
+//            }
+//        }
+//        return postulantsEntity;
+//    }
+//
+//    public Postulant createPostulant(User user, Event event, boolean flagActive){
+//        return getUsersEntity() != null ? getPostulantsEntity().create(user, event, flagActive) : null;
+//    }
+//
+//    public List<Postulant> findAllPostulants() {
+//        return getUsersEntity() != null ? getPostulantsEntity().findAll(getUsersEntity(), getEventsEntity()) : null;
+//    }
+//
+//    public List<Postulant> findAllPostulantsByUser(User user) {
+//        return getUsersEntity() != null ? getPostulantsEntity().findByUser(user, getUsersEntity(), getEventsEntity()) : null;
+//    }
 }
