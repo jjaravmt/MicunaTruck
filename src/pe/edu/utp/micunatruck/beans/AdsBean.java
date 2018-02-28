@@ -23,7 +23,7 @@ public class AdsBean implements Serializable {
     }
 
     public List<Ads> getAdsRs(){
-        micunaTruckService=new MicunaTruckService();
+        //micunaTruckService=new MicunaTruckService();
         return micunaTruckService.findAllAds();
     }
 
@@ -110,8 +110,13 @@ public class AdsBean implements Serializable {
     }
 
     public String deleteAds(Ads ads){
-        micunaTruckService.deleteAds(ads.getId());
-        return "success";
+        try {
+            micunaTruckService.deleteAds(ads.getId());
+            return "success";
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
