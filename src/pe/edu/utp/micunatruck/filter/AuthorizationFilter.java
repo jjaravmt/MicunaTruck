@@ -39,6 +39,9 @@ public class AuthorizationFilter implements Filter {
                     || reqURI.indexOf("/home.xhtml") >= 0
                     || reqURI.indexOf("/user-login.xhtml") >= 0
                     || reqURI.indexOf("/user-register.xhtml") >= 0
+                    || reqURI.indexOf("/newAds.xhtml")>=0
+                    || reqURI.indexOf("/showAds.xhtml")>=0
+                    || reqURI.indexOf("/editAds.xhtml")>=0
                     || (ses != null && ses.getAttribute("username") != null)
                     || reqURI.indexOf("/public/") >= 0
                     || reqURI.contains("javax.faces.resource")
