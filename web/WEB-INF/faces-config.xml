@@ -127,7 +127,7 @@
         <navigation-case>
             <from-action>#{userBean.editUser(userBean.authBean.user)}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/eventProfile.xhtml</to-view-id>
+            <to-view-id>/profile.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -136,7 +136,7 @@
         <navigation-case>
             <from-action>#{userBean.editUser(userBean.authBean.user)}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/eventProfile.xhtml</to-view-id>
+            <to-view-id>/profile.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -145,12 +145,12 @@
         <navigation-case>
             <from-action>#{userBean.editUser(userBean.user)}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/eventProfile.xhtml</to-view-id>
+            <to-view-id>/profile.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/eventProfile.xhtml</from-view-id>
+        <from-view-id>/profile.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{userBean.updateUser}</from-action>
             <from-outcome>success</from-outcome>
