@@ -94,7 +94,7 @@ public class EventsEntity extends BaseEntity {
                 e.printStackTrace();
             }
             String sql = "INSERT INTO events(user_id, event_status_id, name, description, image, date, flag_active, updated_at) " +
-                    "VALUES("+1+","+1+",'"+name+"','"+description+"','"+image+"','"+(new Timestamp(dateDb.getTime())).toString()+"',1,'"+(new Timestamp(createdAt.getTime())).toString()+"')";
+                    "VALUES("+user.getId()+","+1+",'"+name+"','"+description+"','"+image+"','"+(new Timestamp(dateDb.getTime())).toString()+"',1,'"+(new Timestamp(createdAt.getTime())).toString()+"')";
             int results = updateByCriteria(sql);
             if(results > 0){
                 Event event = new Event(getMaxId(), user, eventStatus, name, description, image, 1, date);
