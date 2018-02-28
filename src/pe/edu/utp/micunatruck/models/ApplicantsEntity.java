@@ -7,8 +7,8 @@ import java.util.List;
 
 public class ApplicantsEntity extends BaseEntity {
 
-    private static String DEFAULT_SQL = "SELECT * FROM micunatruck.postulants ";
-    private static String DEFAULT_SQL_UPDATE = "UPDATE micunatruck.postulants SET ";
+    private static String DEFAULT_SQL = "SELECT * FROM micunatruck.applicants ";
+    private static String DEFAULT_SQL_UPDATE = "UPDATE micunatruck.applicants SET ";
 
     private List<Applicant> findByCriteria(String sql, UsersEntity usersEntity, EventsEntity eventsEntity)
     {
@@ -103,5 +103,10 @@ public class ApplicantsEntity extends BaseEntity {
             }
         }
         return 0;
+    }
+
+    public List<Applicant> findAllByEvent(Event event, UsersEntity usersEntity, EventsEntity eventsEntity){
+        String sql = DEFAULT_SQL + " WHERE event_id = " + String.valueOf(event.getId()) + " AND deleted_at IS NULL";
+        return findByCriteria(sql, usersEntity, eventsEntity);
     }
 }

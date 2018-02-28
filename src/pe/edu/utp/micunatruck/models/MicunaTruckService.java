@@ -17,7 +17,7 @@ public class MicunaTruckService {
     private EventStatusEntity eventStatusEntity;
     private AdsEntity adsEntity;
     private AdminsEntity adminsEntity;
-//    private PostulantsEntity postulantsEntity;
+    private ApplicantsEntity applicantsEntity;
 
 
     private Connection getConnection() {
@@ -234,4 +234,20 @@ public class MicunaTruckService {
 //    public List<Postulant> findAllPostulantsByUser(User user) {
 //        return getUsersEntity() != null ? getPostulantsEntity().findByUser(user, getUsersEntity(), getEventsEntity()) : null;
 //    }
+
+
+
+    public ApplicantsEntity getApplicantsEntity() {
+        if(getConnection() != null){
+            if(applicantsEntity == null){
+                applicantsEntity = new ApplicantsEntity();
+                applicantsEntity.setConnection(getConnection());
+            }
+        }
+        return applicantsEntity;
+    }
+
+    public List<Applicant> findAllApplicantsByEvent(Event event) {
+        return getApplicantsEntity() != null ? getApplicantsEntity().findAllByEvent(event, getUsersEntity(), getEventsEntity()) : null;
+    }
 }
