@@ -124,4 +124,10 @@ public class ApplicantsEntity extends BaseEntity {
         String sql = DEFAULT_SQL + " WHERE event_id = " + String.valueOf(event.getId()) + " AND deleted_at IS NULL";
         return findByCriteria(sql, usersEntity, eventsEntity);
     }
+
+    public boolean accept(Applicant applicant){
+        return updateByCriteria(DEFAULT_SQL_UPDATE
+                + " flag_active = 1"
+                + "WHERE id " + String.valueOf(applicant.getId()) ) > 0;
+    }
 }

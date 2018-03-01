@@ -66,6 +66,7 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Foto</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
@@ -75,11 +76,15 @@
                                         <td>#{applicant.id}</td>
                                         <td>#{applicant.user.name}</td>
                                         <td>#{applicant.user.photo}</td>
+                                        <td>#{applicant.flagActive}</td>
                                         <td>
                                             <div class="btn-group text-center">
                                                 <h:form>
                                                     <h:commandLink title="Ver perfil" type="button" class="btn info">
                                                         <i class="fa fa-user"></i>
+                                                    </h:commandLink>
+                                                    <h:commandLink action="#{aplicantBean.acceptEvent(applicant)}" title="Aceptar postulante" type="button" class="btn btn-success">
+                                                        Aceptar
                                                     </h:commandLink>
                                                 </h:form>
                                             </div>
@@ -92,10 +97,16 @@
                                     <th>Id</th>
                                     <th>Nombre</th>
                                     <th>Foto</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>
                         </table>
+                        <div class="col-sm-6 text-right">
+                            <h:form>
+                                <h:commandLink class="btn btn-primary"  value="Aceptar postulantes" action="#{aplicantBean.saveApplicants}"/>
+                            </h:form>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>

@@ -90,4 +90,9 @@ public class AplicantBean implements Serializable {
     public List<Applicant> getAllApplicantsByEvent() {
         return micunaTruckService.findAllApplicantsByEvent(this.getEvent());
     }
+
+    public String acceptEvent(Applicant applicant){
+        micunaTruckService.acceptApplicantByEvent(applicant);
+        return "success";
+    }
 }

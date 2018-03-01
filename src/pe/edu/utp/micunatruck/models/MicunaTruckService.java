@@ -282,4 +282,8 @@ public class MicunaTruckService {
     public List<Applicant> findAllPostulantsByUser(User user) {
         return getUsersEntity() != null ? getApplicantsEntity().findByUser(user, getUsersEntity(), getEventsEntity()) : null;
     }
+
+    public boolean acceptApplicantByEvent(Applicant applicant){
+        return getApplicantsEntity() != null ? getApplicantsEntity().accept(applicant) : null;
+    }
 }
